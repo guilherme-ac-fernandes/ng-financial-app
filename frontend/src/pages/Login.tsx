@@ -14,6 +14,8 @@ export default function Login() {
   };
 
   useEffect(() => {
+    // Regex para validação da senha proveniente do Stack OverFlow
+    // source: https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a 
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     if(username.length > 3 && password.match(regexPassword)) {
       return setIsAble(false);
