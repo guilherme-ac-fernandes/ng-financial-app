@@ -1,7 +1,9 @@
 import * as express from 'express';
 // import Middlewares from './middlewares';
 
-
+// Estruturação do App como classe proveniente do projeto Trybe Futebol Clube
+// realizado durante o curso da Trybe
+// source: https://github.com/guilherme-ac-fernandes/trybe-futebol-clube/blob/main/app/backend/src/app.ts
 class App {
   public app: express.Express;
 
