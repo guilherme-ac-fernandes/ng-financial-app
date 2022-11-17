@@ -14,9 +14,9 @@ export default function Login() {
   };
 
   useEffect(() => {
-    // Regex para validação da senha proveniente do Stack OverFlow
-    // source: https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a 
-    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    // Regex para validação da senha proveniente do Stack OverFlow após adaptação
+    // source: https://pt.stackoverflow.com/questions/373574/regex-para-senha-forte#:~:text=1%20Letra%20Maiúscula%20no%20m%C3%ADnimo,%2C%20bb%20%2C%2044%20%2C%20etc
+    const regexPassword = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/;
     if(username.length > 3 && password.match(regexPassword)) {
       return setIsAble(false);
     }
@@ -39,7 +39,7 @@ export default function Login() {
         <Input
           id={ 'login-password' }
           label={ 'Senha do usuário:' }
-          type={ "password" }
+          type={ 'password' }
           value={ password }
           setValue={ setPassword }
           dataTestId={ 'login-password' }
