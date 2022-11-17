@@ -3,7 +3,7 @@ import db from '.';
 
 class Account extends Model {
   id!: number;
-  balance!: string;
+  balance!: number;
 }
 
 Account.init({
