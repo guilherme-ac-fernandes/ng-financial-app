@@ -48,7 +48,7 @@ Transaction.init(
     },
   },
   {
-    underscored: true,
+    // underscored: true,
     sequelize: db,
     modelName: 'Transactions',
     updatedAt: false,

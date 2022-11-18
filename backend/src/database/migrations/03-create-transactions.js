@@ -10,7 +10,7 @@ module.exports = {
       debitedAccountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        field: 'debited_account_id',
+        // field: 'debited_account_id',
         foreignKey: true,
         references: {
           model: 'Accounts',
@@ -22,7 +22,7 @@ module.exports = {
       creditedAccountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        field: 'credited_account_id',
+        // field: 'credited_account_id',
         foreignKey: true,
         references: {
           model: 'Accounts',
