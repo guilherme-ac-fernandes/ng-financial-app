@@ -4,6 +4,7 @@ import TokenHelpers from '../helpers/TokenHelpers';
 
 interface NewRequest extends Request {
   username?: string,
+  accountId?: number,
 }
 
 export default async (req: NewRequest, _res: Response, next: NextFunction) => {
@@ -13,10 +14,8 @@ export default async (req: NewRequest, _res: Response, next: NextFunction) => {
       return next({ code: 401, message: 'Token not found' });
     }
     const { username, accountId } = TokenHelpers.verify(token);
-    if (Number(accountId) !== Number(req.params.id)) {
-      return next({ code: 401, message: 'Unauthorized request' });
-    }
     req.username = username;
+    req.accountId = accountId;
     next();
   } catch (err) {
     next({ code: 401, message: 'Token must be a valid token' });

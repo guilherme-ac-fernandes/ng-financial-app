@@ -3,8 +3,8 @@ import AccountModel from '../models/AccountModel';
 export default class AccountService {
   private _account: AccountModel;
 
-  constructor(accountModel: AccountModel) {
-    this._account = accountModel;
+  constructor(model: AccountModel) {
+    this._account = model;
   }
 
   public async findByPk(id: number) {
