@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 import UserRoute from '../routes/UserRoute';
 import AccountRoute from '../routes/AccountRoute';
+import TransactionRoute from '../routes/TransactionRoute';
 import Middlewares from '../middlewares';
 
 // Estruturação do App como classe proveniente do projeto Trybe Futebol Clube
@@ -19,6 +20,7 @@ class App {
 
     this.app.use(UserRoute);
     this.app.use('/account', AccountRoute);
+    this.app.use('/transactions', TransactionRoute);
 
     this.app.use(Middlewares.error);
   }
