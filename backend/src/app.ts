@@ -15,7 +15,7 @@ class App {
 
     this.app.get('/', (_req, res) => res.json({ ok: true }));
 
-    this.app.use('/user', UserRoute);
+    this.app.use(UserRoute);
 
     this.app.use(Middlewares.error);
   }
