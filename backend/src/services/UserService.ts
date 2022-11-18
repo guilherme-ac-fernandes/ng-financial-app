@@ -29,7 +29,7 @@ export default class UserService {
   public async login({ username, password }: ILogin) {
     const userFound = await this._user.findByUsername(username) as unknown as ICreateUser;
     if (!userFound || !BcryptService.compare(userFound.password, password)) {
-      return { code: 401, message: 'Incorrect email or password' };
+      return { code: 401, message: 'Incorrect username or password' };
     }
     const token = TokenHelpers.createToken(username);
     return { code: 200, data: { token, username } };
