@@ -12,7 +12,7 @@ export default class AccountModel {
   async create(
     { balance }: IAccount,
     transaction: Transaction
-  ): Promise<ICreateAccount | null> {
+  ): Promise<ICreateAccount> {
     return this._model.create({ balance }, { transaction });
   }
 }
