@@ -5,8 +5,12 @@ import User from '../database/models/User';
 export default class UserModel {
   protected _model = User;
 
-  async findOne(username: string): Promise<ICreateUser | null> {
+  async findByUsername(username: string): Promise<ICreateUser | null> {
     return this._model.findOne({ where: { username } });
+  }
+
+  async findAll(): Promise<ICreateUser[] | null> {
+    return this._model.findAll({ attributes: { exclude: ['id', 'password', 'accountId'] } });
   }
 
   async create(
