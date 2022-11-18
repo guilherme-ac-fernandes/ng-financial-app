@@ -1,6 +1,7 @@
 import * as express from 'express';
-import UserRoute from './routes/UserRoute';
-import Middlewares from './middlewares';
+import * as cors from 'cors';
+import UserRoute from '../routes/UserRoute';
+import Middlewares from '../middlewares';
 
 // Estruturação do App como classe proveniente do projeto Trybe Futebol Clube
 // realizado durante o curso da Trybe
@@ -10,9 +11,9 @@ class App {
 
   constructor() {
     this.app = express();
-
     this.config();
-
+    
+    this.app.use(cors());
     this.app.get('/', (_req, res) => res.json({ ok: true }));
 
     this.app.use(UserRoute);
