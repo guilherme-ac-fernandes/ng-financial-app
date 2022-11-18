@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "./build/server",
+  "main": "./build/api/server",
   "scripts": {
     "build": "npx -y tsc",
     "test:coverage": "nyc npm run test",
@@ -10,7 +10,7 @@
     "prestart": "npm run build && npm run db:reset",
     "start": "node .",
     "predev": "npm run build && npm run db:reset",
-    "dev": "tsnd src/server.ts"
+    "dev": "tsnd src/api/server.ts"
   },
   "keywords": [],
   "author": "",
