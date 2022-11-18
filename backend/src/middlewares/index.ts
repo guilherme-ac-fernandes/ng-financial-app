@@ -1,3 +1,4 @@
 import error from './error';
+import UserValidations from './UserValidations';
 
-export default { error };
+export default { error, UserValidations };
