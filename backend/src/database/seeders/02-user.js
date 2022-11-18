@@ -2,14 +2,16 @@ module.exports = {
   up: async (queryInterface) => {
     await queryInterface.bulkInsert('Users', [
       {
-        username: '@guilherme',
-        password: '1234Gui1234',
+        username: 'barneystinson',
+        password: '$2a$10$zaI0xhw2FvOnmXi45DL.Du8k2eOXd3DFnim42aR8rx2QxysLM.7JW',
         account_id: 1,
+        // len123Gen
       },
       {
-        username: '@felipe',
-        password: '1234Felipe',
+        username: 'lilipad',
+        password: '$2a$10$lXN/Cfkkau9c1tDLlUIk7.ekK1/s4ctiOAiOmM/CLi3Y4cqEzDsX6',
         account_id: 2,
+        // Pillow1234
       },
     ], {});
   },
