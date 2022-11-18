@@ -10,7 +10,7 @@
     "prestart": "npm run build && npm run db:reset",
     "start": "node .",
     "predev": "npm run build && npm run db:reset",
-    "dev": "nodemon --watch \"./src/**\" ./src/server.ts"
+    "dev": "tsnd src/server.ts"
   },
   "keywords": [],
   "author": "",
