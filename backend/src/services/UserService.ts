@@ -31,7 +31,7 @@ export default class UserService {
     if (!userFound || !BcryptService.compare(userFound.password, password)) {
       return { code: 401, message: 'Incorrect username or password' };
     }
-    const token = TokenHelpers.createToken(username);
+    const token = TokenHelpers.createToken(username, userFound.accountId);
     return { code: 200, data: { token, username } };
   }
 
@@ -49,7 +49,7 @@ export default class UserService {
         transaction
       );
       await transaction.commit();
-      const token = TokenHelpers.createToken(username);
+      const token = TokenHelpers.createToken(username, accountId);
       return { code: 201, data: { username, token } };
     } catch (error) {
       // console.log(error);
