@@ -1,6 +1,6 @@
 import * as express from 'express';
 import UserRoute from './routes/UserRoute';
-// import Middlewares from './middlewares';
+import Middlewares from './middlewares';
 
 // Estruturação do App como classe proveniente do projeto Trybe Futebol Clube
 // realizado durante o curso da Trybe
@@ -17,7 +17,7 @@ class App {
 
     this.app.use('/user', UserRoute);
 
-    // this.app.use(Middlewares.error);
+    this.app.use(Middlewares.error);
   }
 
   private config():void {
