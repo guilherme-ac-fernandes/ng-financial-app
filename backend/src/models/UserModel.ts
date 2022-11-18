@@ -10,7 +10,7 @@ export default class UserModel {
   }
 
   async findAll(): Promise<ICreateUser[] | null> {
-    return this._model.findAll({ attributes: { exclude: ['id', 'password', 'accountId'] } });
+    return this._model.findAll({ attributes: { exclude: ['id', 'password'] } });
   }
 
   async create(
