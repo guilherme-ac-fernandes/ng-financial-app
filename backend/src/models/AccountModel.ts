@@ -15,4 +15,8 @@ export default class AccountModel {
   ): Promise<ICreateAccount> {
     return this._model.create({ balance }, { transaction });
   }
+
+  async update(id: number, { balance }: IAccount, transaction: Transaction) {
+    return this._model.update({ balance }, { where: { id }, transaction });
+  }
 }
