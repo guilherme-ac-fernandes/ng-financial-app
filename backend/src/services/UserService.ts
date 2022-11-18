@@ -1,4 +1,4 @@
-import { ILogin } from '../interfaces/IUser';
+import { ICreateUser, ILogin } from '../interfaces/IUser';
 import UserModel from '../models/UserModel';
 import AccountModel from '../models/AccountModel';
 import Sequelize from '../database/models';
@@ -14,21 +14,29 @@ export default class UserService {
     this._account = accountModel;
   }
 
-  public async findOneUsername(username: string) {
-    const userFound = this._user.findOne(username);
-    if (!userFound) return null;
-    return userFound;
+  public async findByUsername(username: string) {
+    const userFound = await this._user.findByUsername(username) as unknown as ICreateUser;
+    if (!userFound) return { code: 404, message: 'User not found' };
+    return { code: 200, data: userFound };
   }
 
-  // public async login(userLogin: ILogin) {
-  //   const userFound = this.findOneUsername(
-  //     userLogin.username
-  //   ) as unknown as ICreateUser;
-  //   if (userFound.password !== userLogin.password) {
-  //     return { code: 401, message: 'Invalid password' };
-  //   }
-  // }
+  public async findAll() {
+    const users = await this._user.findAll();
+    if (!users) return { code: 404, message: 'Users not found' };
+    return { code: 200, data: users };
+  }
 
+  public async login({ username, password }: ILogin) {
+    const userFound = await this._user.findByUsername(username) as unknown as ICreateUser;
+    if (!userFound || !BcryptService.compare(userFound.password, password)) {
+      return { code: 401, message: 'Incorrect email or password' };
+    }
+    const token = TokenHelpers.createToken(username);
+    return { code: 200, data: { token, username } };
+  }
+
+  // Utilização das transaction proveniente da documentação do Sequelize
+  // source: https://sequelize.org/docs/v6/other-topics/transactions/
   public async create({ username, password }: ILogin) {
     const transaction = await Sequelize.transaction();
     try {
@@ -42,11 +50,11 @@ export default class UserService {
       );
       await transaction.commit();
       const token = TokenHelpers.createToken(username);
-      return { token, username };
+      return { code: 201, data: { username, token } };
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       await transaction.rollback();
-      return { message: 'Internal server error' };
+      return { code: 500, message: 'Internal server error' };
     }
   }
 }
