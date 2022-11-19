@@ -1,4 +1,4 @@
-import { Model, INTEGER } from 'sequelize';
+import { Model, INTEGER, DECIMAL } from 'sequelize';
 import db from '.';
 import Transaction from './Transaction';
 import User from './User';
@@ -16,7 +16,7 @@ Account.init({
     autoIncrement: true,
   },
   balance: {
-    type: INTEGER,
+    type: DECIMAL,
     allowNull: false,
   },
 }, {
