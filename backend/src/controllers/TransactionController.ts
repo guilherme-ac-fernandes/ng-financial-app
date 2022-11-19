@@ -2,6 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import { ITransaction } from '../interfaces/ITransaction';
 import TransactionService from '../services/TransactionService';
 
+interface NewRequest extends Request {
+  username?: string,
+  accountId?: number,
+}
+
 export default class TransactionController {
   private _transaction: TransactionService;
 
@@ -17,6 +22,20 @@ export default class TransactionController {
       debitedAccountId,
       value,
     });
+    if (message) return next({ code, message });
+    return res.status(code).json(data);
+  }
+
+  public async findAll(req: Request, res: Response, next: NextFunction) {
+    const { accountId } = req as NewRequest;
+    const { search } = req.query;
+    if (search) {
+      const { code, message, data } = await this._transaction
+        .findAllSearch(Number(accountId), String(search));
+      if (message) return next({ code, message });
+      return res.status(code).json(data);
+    }
+    const { code, message, data } = await this._transaction.findAll(Number(accountId));
     if (message) return next({ code, message });
     return res.status(code).json(data);
   }
