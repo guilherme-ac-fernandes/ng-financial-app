@@ -40,4 +40,37 @@ export default class TransactionService {
       return { code: 500, message: 'Internal server error' };
     }
   }
+
+  public async findAll(accountId: number) {
+    const transactions = await this._transaction.findAll();
+    if (!transactions) return { code: 404, message: 'Transactions not found' };
+    const transactionsFilter = transactions.filter(
+      ({ creditedAccountId, debitedAccountId }) =>
+        creditedAccountId === accountId || debitedAccountId === accountId
+    );
+    return { code: 200, data: transactionsFilter };
+  }
+
+  public async findAllSearch(accountId: number, search: string) {
+    const transactions = await this._transaction.findAll();
+    if (!transactions) return { code: 404, message: 'Transactions not found' };
+    const transactionsFilter = transactions.filter(
+      ({ creditedAccountId, debitedAccountId }) =>
+        creditedAccountId === accountId || debitedAccountId === accountId
+    );
+    switch (search) {
+      case 'debit': 
+        return { code: 200, data: transactions
+            .filter(({ debitedAccountId }) => debitedAccountId === accountId) }
+      case 'credit': 
+        return { code: 200, data: transactions
+          .filter(({ creditedAccountId }) => creditedAccountId === accountId) }
+      default:
+        // Validação de datas para não retorna erro proveniente do site LinuxHint
+        // source: https://linuxhint.com/validate-date-javascript/
+        if (isNaN(Date.parse(search))) return { code: 404, message: 'Invalid params' };
+        return { code: 200, data: transactionsFilter
+          .filter(({ createdAt }) => new Date(createdAt) >= new Date(search)) };
+    }
+  }
 }
