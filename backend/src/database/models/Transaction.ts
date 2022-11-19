@@ -1,6 +1,5 @@
 import { Model, INTEGER, DATE, DECIMAL } from 'sequelize';
 import db from '.';
-// import Account from './Account';
 
 class Transaction extends Model {
   id!: number;
@@ -48,20 +47,10 @@ Transaction.init(
     },
   },
   {
-    // underscored: true,
     sequelize: db,
     modelName: 'Transactions',
     updatedAt: false,
   }
 );
-
-// Transaction.belongsTo(Account, {
-//   foreignKey: 'debitedAccountId',
-//   as: 'debitedTransaction',
-// });
-// Transaction.belongsTo(Account, {
-//   foreignKey: 'creditedAccountId',
-//   as: 'creditedTransaction',
-// });
 
 export default Transaction;

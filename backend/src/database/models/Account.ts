@@ -27,14 +27,7 @@ Account.init({
 });
 
 Account.belongsTo(User, { foreignKey: 'id', as: 'account' });
-
-Account.hasMany(Transaction, {
-  foreignKey: 'id',
-  as: 'debitedTransaction',
-});
-Account.hasMany(Transaction, {
-  foreignKey: 'id',
-  as: 'creditedTransaction',
-});
+Account.hasMany(Transaction, { foreignKey: 'id', as: 'debitedTransaction' });
+Account.hasMany(Transaction, { foreignKey: 'id', as: 'creditedTransaction' });
 
 export default Account;
