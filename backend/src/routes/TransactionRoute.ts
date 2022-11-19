@@ -9,7 +9,10 @@ const route = Router();
 
 const accountModel = new AccountModel();
 const transactionModel = new TransactionModel();
-const transactionService = new TransactionService(transactionModel, accountModel);
+const transactionService = new TransactionService(
+  transactionModel,
+  accountModel
+);
 const transactionController = new TransactionController(transactionService);
 
 route.post(
@@ -17,6 +20,12 @@ route.post(
   Middlewares.auth,
   Middlewares.TransactionValidations,
   (req, res, next) => transactionController.create(req, res, next)
+);
+
+route.get(
+  '/filter',
+  Middlewares.auth,
+  (req, res, next) => transactionController.findAll(req, res, next)
 );
 
 export default route;
