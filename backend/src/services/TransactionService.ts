@@ -16,20 +16,19 @@ export default class TransactionService {
   // Utilização das transaction proveniente da documentação do Sequelize
   // source: https://sequelize.org/docs/v6/other-topics/transactions/
   public async create({ debitedAccountId, creditedAccountId, value }: ITransaction) {
-    const valueUpdated = value * 100;
     const debitedUser = await this._account.findByPk(debitedAccountId) as unknown as ICreateAccount;
     const creditedUser = await this._account.findByPk(creditedAccountId) as unknown as ICreateAccount;
     if (!debitedUser || !creditedUser) return { code: 404, message: 'Invalid account' };
-    if (Number(debitedUser.balance) < valueUpdated) {
+    if (Number(debitedUser.balance) < value) {
       return { code: 400, message: 'Insufficient funds' };
     }
-    const debitedBalance = debitedUser.balance - valueUpdated;
-    const creditedBalance = creditedUser.balance + valueUpdated;
+    const debitedBalance = Number(debitedUser.balance) - value;
+    const creditedBalance = Number(creditedUser.balance) + value;
     const transaction = await Sequelize.transaction();
 
     try {
       const transactionCreated =  await this._transaction.create(
-        { debitedAccountId, creditedAccountId, value: valueUpdated },
+        { debitedAccountId, creditedAccountId, value },
         transaction
       );
       await this._account.update(debitedAccountId, { balance: debitedBalance }, transaction);
