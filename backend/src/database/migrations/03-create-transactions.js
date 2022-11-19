@@ -32,7 +32,7 @@ module.exports = {
         onUpdate: 'CASCADE',
       },
       value: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10,2),
         allowNull: false,
       },
       createdAt: {
