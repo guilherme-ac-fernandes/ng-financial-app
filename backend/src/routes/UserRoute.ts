@@ -12,10 +12,10 @@ const accountModel = new AccountModel();
 const userService = new UserService(userModel, accountModel);
 const userController = new UserController(userService);
 
-route.post('/user', Middlewares.UserValidations, (req, res, next) =>
+route.post('/register', Middlewares.UserValidations, (req, res, next) =>
   userController.create(req, res, next)
 );
 route.post('/login', (req, res, next) => userController.login(req, res, next));
-route.get('/register', (req, res, next) => userController.findAll(req, res, next));
+route.get('/user', (req, res, next) => userController.findAll(req, res, next));
 
 export default route;
