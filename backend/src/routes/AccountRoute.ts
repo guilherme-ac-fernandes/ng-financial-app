@@ -10,8 +10,10 @@ const accountModel = new AccountModel();
 const accountService = new AccountService(accountModel);
 const accountController = new AccountController(accountService);
 
-route.get('/:id', Middlewares.auth, (req, res, next) =>
-  accountController.findByPk(req, res, next)
+route.get(
+  '/:id',
+  Middlewares.auth,
+  (req, res, next) => accountController.findByPk(req, res, next)
 );
 
 export default route;
