@@ -1,4 +1,4 @@
 export interface IQuery {
-  search?: 'debit'| 'credit',
+  search?: 'debit' | 'credit',
   date?: string,
 }
