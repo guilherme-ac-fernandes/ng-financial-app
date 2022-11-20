@@ -9,6 +9,7 @@ module.exports = {
       },
       balance: {
         type: Sequelize.DECIMAL(10,2),
+        defaultValue: 100.00,
         allowNull: false,
       },
     });
