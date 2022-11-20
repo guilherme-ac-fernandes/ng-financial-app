@@ -4,6 +4,7 @@ import Sequelize from '../database/models';
 import { ICreateAccount } from '../interfaces/IAccount';
 import { ICreateTransaction, ITransaction } from '../interfaces/ITransaction';
 import { IQuery } from '../interfaces/IQuery';
+import { IResponse } from '../interfaces/IResponse';
 
 const TRANSACTION_NOT_FOUND = { code: 404, message: 'Transactions not found' };
 
@@ -39,7 +40,7 @@ export default class TransactionService {
     }
   }
 
-  public async findAll(accountId: number) {
+  public async findAll(accountId: number): Promise<IResponse> {
     const transactions = await this._transaction.findAll(accountId);
     if (!transactions) return TRANSACTION_NOT_FOUND;
     return { code: 200, data: transactions };
@@ -59,7 +60,7 @@ export default class TransactionService {
 
   // Validação da Data proveniente do site LinuxHint
   // source: https://linuxhint.com/validate-date-javascript/
-  public async findAllSearch(accountId: number, query: IQuery) {
+  public async findAllSearch(accountId: number, query: IQuery): Promise<IResponse> {
     const transactions = await this._transaction.findAll(accountId);
     if (!transactions) return TRANSACTION_NOT_FOUND;
     const transactionsFilterSearch = TransactionService
