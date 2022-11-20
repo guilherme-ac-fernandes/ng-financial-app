@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as cors from 'cors';
+import 'express-async-errors';
 import UserRoute from '../routes/UserRoute';
 import AccountRoute from '../routes/AccountRoute';
 import TransactionRoute from '../routes/TransactionRoute';
