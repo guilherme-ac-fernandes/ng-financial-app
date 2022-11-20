@@ -57,6 +57,8 @@ export default class TransactionService {
     });
   }
 
+  // Validação da Data proveniente do site LinuxHint
+  // source: https://linuxhint.com/validate-date-javascript/
   public async findAllSearch(accountId: number, query: IQuery) {
     const transactions = await this._transaction.findAll(accountId);
     if (!transactions) return TRANSACTION_NOT_FOUND;
