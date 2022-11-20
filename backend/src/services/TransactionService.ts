@@ -2,7 +2,8 @@ import TransactionModel from '../models/TransactionModel';
 import AccountModel from '../models/AccountModel';
 import Sequelize from '../database/models';
 import { ICreateAccount } from '../interfaces/IAccount';
-import { ITransaction } from '../interfaces/ITransaction';
+import { ICreateTransaction, ITransaction } from '../interfaces/ITransaction';
+import { IQuery } from '../interfaces/IQuery';
 
 export default class TransactionService {
   private _transaction: TransactionModel;
@@ -42,35 +43,41 @@ export default class TransactionService {
   }
 
   public async findAll(accountId: number) {
-    const transactions = await this._transaction.findAll();
+    const transactions = await this._transaction.findAll(accountId);
     if (!transactions) return { code: 404, message: 'Transactions not found' };
-    const transactionsFilter = transactions.filter(
-      ({ creditedAccountId, debitedAccountId }) =>
-        creditedAccountId === accountId || debitedAccountId === accountId
-    );
-    return { code: 200, data: transactionsFilter };
+    return { code: 200, data: transactions };
   }
 
-  public async findAllSearch(accountId: number, search: string) {
-    const transactions = await this._transaction.findAll();
+  static filterBySearch (
+    transactionsFilter: ICreateTransaction[],
+    accountId: number,
+    search: string,
+    ) {
+    return transactionsFilter.filter((item) => {
+      if (search === 'debit' && item.debitedAccountId === accountId) return true;
+      if (search === 'credit' && item.creditedAccountId === accountId) return true;
+      return false;
+    });
+  }
+
+  public async findAllSearch(accountId: number, query: IQuery) {
+    const transactions = await this._transaction.findAll(accountId);
     if (!transactions) return { code: 404, message: 'Transactions not found' };
-    const transactionsFilter = transactions.filter(
-      ({ creditedAccountId, debitedAccountId }) =>
-        creditedAccountId === accountId || debitedAccountId === accountId
-    );
-    switch (search) {
-      case 'debit': 
-        return { code: 200, data: transactions
-            .filter(({ debitedAccountId }) => debitedAccountId === accountId) }
-      case 'credit': 
-        return { code: 200, data: transactions
-          .filter(({ creditedAccountId }) => creditedAccountId === accountId) }
-      default:
-        // Validação de datas para não retorna erro proveniente do site LinuxHint
-        // source: https://linuxhint.com/validate-date-javascript/
-        if (isNaN(Date.parse(search))) return { code: 404, message: 'Invalid params' };
-        return { code: 200, data: transactionsFilter
-          .filter(({ createdAt }) => new Date(createdAt) >= new Date(search)) };
-    }
+    if (query.search && !query.date) return {
+      code: 200,
+      data: TransactionService.filterBySearch(transactions, accountId, query.search),
+    };
+    if (isNaN(Date.parse(query.date as string))) return { code: 404, message: 'Invalid params' };
+    const transactionsFilterDate = await this._transaction.findByDate(accountId, query.date);
+    if (!transactionsFilterDate) return { code: 404, message: 'Transactions not found' };
+    if (!query.search && query.date) return {
+      code: 200,
+      data: transactionsFilterDate,
+    };
+    if (query.search && query.date) return {
+      code: 200,
+      data: TransactionService.filterBySearch(transactionsFilterDate, accountId, query.search),
+    };
+    return { code: 200, data: transactions };
   }
 }
