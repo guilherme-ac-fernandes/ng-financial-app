@@ -43,7 +43,5 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=NG_FINANCIAL
-    volumes:
-      - ./db:/var/lib/postgresql/data
 
   
