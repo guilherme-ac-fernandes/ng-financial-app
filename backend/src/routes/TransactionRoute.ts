@@ -11,21 +11,21 @@ const accountModel = new AccountModel();
 const transactionModel = new TransactionModel();
 const transactionService = new TransactionService(
   transactionModel,
-  accountModel
+  accountModel,
 );
 const transactionController = new TransactionController(transactionService);
 
 route.post(
   '/',
   Middlewares.auth,
-  Middlewares.TransactionValidations,
-  (req, res, next) => transactionController.create(req, res, next)
+  Middlewares.transactionValidations,
+  (req, res, next) => transactionController.create(req, res, next),
 );
 
 route.get(
   '/filter',
   Middlewares.auth,
-  (req, res, next) => transactionController.findAll(req, res, next)
+  (req, res, next) => transactionController.findAll(req, res, next),
 );
 
 export default route;

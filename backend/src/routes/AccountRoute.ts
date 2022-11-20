@@ -13,7 +13,7 @@ const accountController = new AccountController(accountService);
 route.get(
   '/:id',
   Middlewares.auth,
-  (req, res, next) => accountController.findByPk(req, res, next)
+  (req, res, next) => accountController.findByPk(req, res, next),
 );
 
 export default route;
