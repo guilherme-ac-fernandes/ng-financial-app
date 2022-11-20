@@ -28,10 +28,9 @@ export default class TransactionController {
 
   public async findAll(req: Request, res: Response, next: NextFunction) {
     const { accountId } = req as NewRequest;
-    const { search } = req.query;
-    if (search) {
+    if (req.query.search || req.query.date) {
       const { code, message, data } = await this._transaction
-        .findAllSearch(Number(accountId), String(search));
+        .findAllSearch(Number(accountId), req.query);
       if (message) return next({ code, message });
       return res.status(code).json(data);
     }
