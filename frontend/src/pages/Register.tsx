@@ -1,14 +1,29 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { register } from "../helpers/api";
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isAble, setIsAble] = useState(true);
+  const [erroRegisterAlert, setErroRegisterAlert] = useState(false); 
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log(username, password);
+  const handleRegister = async () => {
+
+    try {
+      setErroRegisterAlert(false);
+      const user = await register({ username, password });
+      console.log(user);
+      
+      localStorage.setItem('user', JSON.stringify(user));
+      return navigate('/transactions');
+    } catch (error) {
+      setErroRegisterAlert(true);
+    }
+
   };
 
   useEffect(() => {
@@ -47,10 +62,11 @@ export default function Register() {
           text={ 'Register' }
           type={ "button" }
           disabled={ isAble }
-          handleSubmit={ handleSubmit }
+          handleSubmit={ handleRegister }
           dataTestId={ 'register-button' }
         />
       </form>
+      {erroRegisterAlert && <h3>Erro no cadastro do usuário, tente novamente!</h3>}
     </section>
   );
 }
