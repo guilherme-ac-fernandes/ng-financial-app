@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import UserService from '../services/UserService';
-// import { IUser, ILogin, ICreateUser } from '../interfaces/IUser';
 
 export default class CarController {
   private _user: UserService;
