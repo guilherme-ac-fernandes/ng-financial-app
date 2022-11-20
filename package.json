@@ -1,0 +1,20 @@
+{
+  "name": "ng-financial-app",
+  "version": "1.0.0",
+  "description": "Aplicativo de transações monetárias entre usuários cadastrados",
+  "main": "",
+  "scripts": {
+    "compose:up": "docker-compose up -d",
+    "compose:down": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilherme-ac-fernandes/ng-financial-app.git"
+  },
+  "author": "Guilherme Fernandes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guilherme-ac-fernandes/ng-financial-app/issues"
+  },
+  "homepage": "https://github.com/guilherme-ac-fernandes/ng-financial-app#readme"
+}
