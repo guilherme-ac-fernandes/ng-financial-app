@@ -33,7 +33,7 @@ export default class UserService {
       return { code: 401, message: 'Incorrect username or password' };
     }
     const token = TokenHelpers.createToken(username, userFound.accountId);
-    return { code: 200, data: { token, username } };
+    return { code: 200, data: { token, username, accountId: userFound.accountId } };
   }
 
   // Utilização das transaction proveniente da documentação do Sequelize
@@ -51,7 +51,7 @@ export default class UserService {
       );
       await transaction.commit();
       const token = TokenHelpers.createToken(username, accountId);
-      return { code: 201, data: { token, username } };
+      return { code: 201, data: { token, username, accountId } };
     } catch (error) {
       // console.log(error);
       await transaction.rollback();
