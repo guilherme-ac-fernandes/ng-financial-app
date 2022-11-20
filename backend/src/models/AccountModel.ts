@@ -1,6 +1,6 @@
+import { Transaction } from 'sequelize/types';
 import { IAccount, ICreateAccount } from '../interfaces/IAccount';
 import Account from '../database/models/Account';
-import { Transaction } from 'sequelize/types';
 
 export default class AccountModel {
   protected _model = Account;
@@ -11,7 +11,7 @@ export default class AccountModel {
 
   async create(
     { balance }: IAccount,
-    transaction: Transaction
+    transaction: Transaction,
   ): Promise<ICreateAccount> {
     return this._model.create({ balance }, { transaction });
   }

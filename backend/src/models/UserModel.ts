@@ -1,5 +1,5 @@
-import { IUser, ICreateUser } from '../interfaces/IUser';
 import { Transaction } from 'sequelize/types';
+import { IUser, ICreateUser } from '../interfaces/IUser';
 import User from '../database/models/User';
 
 export default class UserModel {
@@ -15,12 +15,11 @@ export default class UserModel {
 
   async create(
     { username, password, accountId }: IUser,
-    transaction: Transaction
+    transaction: Transaction,
   ): Promise<ICreateUser | null> {
     return this._model.create(
       { username, password, accountId },
-      { transaction }
+      { transaction },
     );
   }
 }
-
