@@ -5,7 +5,10 @@
   "main": "",
   "scripts": {
     "compose:up": "docker-compose up -d",
-    "compose:down": "docker-compose down"
+    "compose:down": "docker-compose down",
+    "back:acess": "docker exec -it financial_backend /bin/sh",
+    "db:reset": "npm run build && npm run db:reset"
+
   },
   "repository": {
     "type": "git",
