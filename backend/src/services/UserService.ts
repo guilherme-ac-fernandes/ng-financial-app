@@ -51,7 +51,7 @@ export default class UserService {
       );
       await transaction.commit();
       const token = TokenHelpers.createToken(username, accountId);
-      return { code: 201, data: { username, token } };
+      return { code: 201, data: { token, username } };
     } catch (error) {
       // console.log(error);
       await transaction.rollback();
