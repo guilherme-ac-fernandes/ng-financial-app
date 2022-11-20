@@ -1,11 +1,11 @@
-import TransactionValidations from './TransactionValidations';
-import UserValidations from './UserValidations';
+import transactionValidations from './TransactionValidations';
+import userValidations from './UserValidations';
 import error from './error';
 import auth from './auth';
 
 export default {
-  TransactionValidations,
-  UserValidations,
+  transactionValidations,
+  userValidations,
   error,
   auth,
 };

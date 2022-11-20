@@ -20,4 +20,4 @@ export default async (req: Request, _res: Response, next: NextFunction) => {
   const { data } = await userService.findByUsername(username);
   if (data) return next({ code: 400, message: 'Username already exists' });
   next();
-}
+};

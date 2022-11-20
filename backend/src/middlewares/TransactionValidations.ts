@@ -10,4 +10,4 @@ export default async (req: Request, _res: Response, next: NextFunction) => {
     return next({ code: 401, message: 'Transaction must be for different users' });
   }
   next();
-}
+};
