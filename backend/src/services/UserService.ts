@@ -41,7 +41,7 @@ export default class UserService {
     const transaction = await Sequelize.transaction();
     try {
       const { id: accountId } = await this._account.create(
-        { balance: 10000 },
+        { balance: 100.00 },
         transaction
       );
       await this._user.create(
