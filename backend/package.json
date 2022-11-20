@@ -4,13 +4,13 @@
   "description": "",
   "main": "./build/api/server",
   "scripts": {
-    "dev": "tsnd src/api/server.ts",
+    "tsnd": "tsnd src/api/server.ts",
     "build": "npx -y tsc",
     "test:coverage": "nyc npm run test",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "prestart": "npm run build && npm run db:reset",
     "start": "node .",
-    "predev": "npm run build && npm run db:reset"
+    "prestart": "npm run build && npm run db:reset",
+    "predev": "npm run db:reset && npm run tsnd"
   },
   "keywords": [],
   "author": "",
@@ -60,6 +60,7 @@
     "mysql2": "2.3.3",
     "package": "^1.0.1",
     "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
     "sequelize": "6.9.0"
   }
 }
