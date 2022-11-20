@@ -5,6 +5,8 @@ import { ICreateAccount } from '../interfaces/IAccount';
 import { ICreateTransaction, ITransaction } from '../interfaces/ITransaction';
 import { IQuery } from '../interfaces/IQuery';
 
+const TRANSACTION_NOT_FOUND = { code: 404, message: 'Transactions not found' };
+
 export default class TransactionService {
   private _transaction: TransactionModel;
   private _account: AccountModel;
@@ -17,24 +19,19 @@ export default class TransactionService {
   // Utilização das transaction proveniente da documentação do Sequelize
   // source: https://sequelize.org/docs/v6/other-topics/transactions/
   public async create({ debitedAccountId, creditedAccountId, value }: ITransaction) {
-    const debitedUser = await this._account.findByPk(debitedAccountId) as unknown as ICreateAccount;
-    const creditedUser = await this._account.findByPk(creditedAccountId) as unknown as ICreateAccount;
-    if (!debitedUser || !creditedUser) return { code: 404, message: 'Invalid account' };
-    if (Number(debitedUser.balance) < value) {
-      return { code: 400, message: 'Insufficient funds' };
-    }
-    const debitedBalance = Number(debitedUser.balance) - value;
-    const creditedBalance = Number(creditedUser.balance) + value;
+    const debitUser = await this._account.findByPk(debitedAccountId) as unknown as ICreateAccount;
+    const creditUser = await this._account.findByPk(creditedAccountId) as unknown as ICreateAccount;
+    if (!debitUser || !creditUser) return { code: 404, message: 'Invalid account' };
+    if (Number(debitUser.balance) < value) return { code: 400, message: 'Insufficient funds' };
     const transaction = await Sequelize.transaction();
-
     try {
-      const transactionCreated =  await this._transaction.create(
-        { debitedAccountId, creditedAccountId, value },
-        transaction
-      );
-      await this._account.update(debitedAccountId, { balance: debitedBalance }, transaction);
-      await this._account.update(creditedAccountId, { balance: creditedBalance },transaction);
-      await transaction.commit();      
+      const transactionCreated = await this._transaction
+        .create({ debitedAccountId, creditedAccountId, value }, transaction);
+      await this._account
+        .update(debitedAccountId, { balance: Number(debitUser.balance) - value }, transaction);
+      await this._account
+        .update(creditedAccountId, { balance: Number(creditUser.balance) + value }, transaction);
+      await transaction.commit();
       return { code: 201, data: transactionCreated };
     } catch (error) {
       await transaction.rollback();
@@ -44,15 +41,15 @@ export default class TransactionService {
 
   public async findAll(accountId: number) {
     const transactions = await this._transaction.findAll(accountId);
-    if (!transactions) return { code: 404, message: 'Transactions not found' };
+    if (!transactions) return TRANSACTION_NOT_FOUND;
     return { code: 200, data: transactions };
   }
 
-  static filterBySearch (
+  static filterBySearch(
     transactionsFilter: ICreateTransaction[],
     accountId: number,
     search: string,
-    ) {
+  ) {
     return transactionsFilter.filter((item) => {
       if (search === 'debit' && item.debitedAccountId === accountId) return true;
       if (search === 'credit' && item.creditedAccountId === accountId) return true;
@@ -62,22 +59,17 @@ export default class TransactionService {
 
   public async findAllSearch(accountId: number, query: IQuery) {
     const transactions = await this._transaction.findAll(accountId);
-    if (!transactions) return { code: 404, message: 'Transactions not found' };
-    if (query.search && !query.date) return {
-      code: 200,
-      data: TransactionService.filterBySearch(transactions, accountId, query.search),
-    };
+    if (!transactions) return TRANSACTION_NOT_FOUND;
+    const transactionsFilterSearch = TransactionService
+      .filterBySearch(transactions, accountId, query.search as string);
+    if (query.search && !query.date) return { code: 200, data: transactionsFilterSearch };
     if (isNaN(Date.parse(query.date as string))) return { code: 404, message: 'Invalid params' };
     const transactionsFilterDate = await this._transaction.findByDate(accountId, query.date);
-    if (!transactionsFilterDate) return { code: 404, message: 'Transactions not found' };
-    if (!query.search && query.date) return {
-      code: 200,
-      data: transactionsFilterDate,
-    };
-    if (query.search && query.date) return {
-      code: 200,
-      data: TransactionService.filterBySearch(transactionsFilterDate, accountId, query.search),
-    };
+    if (!transactionsFilterDate) return TRANSACTION_NOT_FOUND;
+    if (!query.search && query.date) return { code: 200, data: transactionsFilterDate };
+    const transactionsFilterSearchDate = TransactionService
+      .filterBySearch(transactionsFilterDate, accountId, query.search as string);
+    if (query.search && query.date) return { code: 200, data: transactionsFilterSearchDate };
     return { code: 200, data: transactions };
   }
 }
