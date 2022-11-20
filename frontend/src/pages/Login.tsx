@@ -2,15 +2,26 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { login } from "../helpers/api";
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isAble, setIsAble] = useState(true);
+  const [invalidUserAlert, setInvalidUserAlert] = useState(false); 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log(username, password);
+  const handleSubmit = async () => {
+ 
+    try {
+      setInvalidUserAlert(false);
+      const user = await login({ username, password });
+      localStorage.setItem('user', JSON.stringify(user));
+      return navigate('/transactions');
+    } catch (error) {
+      setInvalidUserAlert(true);
+    }
+
   };
 
   useEffect(() => {
@@ -60,6 +71,7 @@ export default function Login() {
           dataTestId={ 'login-button' }
         />
       </form>
+      {invalidUserAlert && <h3>Usuário não existe, faça o cadastro</h3>}
     </section>
   );
 }
