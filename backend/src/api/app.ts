@@ -15,7 +15,7 @@ class App {
   constructor() {
     this.app = express();
     this.config();
-    
+
     this.app.use(cors());
     this.app.get('/', (_req, res) => res.json({ ok: true }));
 
@@ -46,4 +46,4 @@ class App {
 export { App };
 
 // A execução dos testes de cobertura depende dessa exportação
-// export const { app } = new App();
+export const { app } = new App();
