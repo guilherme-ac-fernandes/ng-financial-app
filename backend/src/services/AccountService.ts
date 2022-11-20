@@ -12,6 +12,4 @@ export default class AccountService {
     if (!accountFound) return { code: 404, message: 'Account not found' };
     return { code: 200, data: accountFound };
   }
-
-
 }
