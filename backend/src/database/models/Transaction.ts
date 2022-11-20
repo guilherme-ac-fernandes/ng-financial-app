@@ -1,4 +1,4 @@
-import { Model, INTEGER, DATE, DECIMAL } from 'sequelize';
+import { Model, INTEGER, DATE, DECIMAL, NOW } from 'sequelize';
 import db from '.';
 
 class Transaction extends Model {
@@ -9,48 +9,36 @@ class Transaction extends Model {
   createdAt!: string;
 }
 
-Transaction.init(
-  {
-    id: {
-      type: INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    debitedAccountId: {
-      type: INTEGER,
-      allowNull: false,
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-      references: {
-        model: 'Accounts',
-        key: 'id',
-      },
-    },
-    creditedAccountId: {
-      type: INTEGER,
-      allowNull: false,
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-      references: {
-        model: 'Accounts',
-        key: 'id',
-      },
-    },
-    value: {
-      type: DECIMAL,
-      allowNull: false,
-    },
-    createdAt: {
-      type: DATE,
-      allowNull: false,
-    },
+Transaction.init({
+  id: {
+    type: INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  {
-    sequelize: db,
-    modelName: 'Transactions',
-    updatedAt: false,
-  }
-);
+  debitedAccountId: {
+    type: INTEGER,
+    allowNull: false,
+  },
+  creditedAccountId: {
+    type: INTEGER,
+    allowNull: false,
+  },
+  value: {
+    type: DECIMAL,
+    allowNull: false,
+  },
+  createdAt: {
+    type: DATE,
+    allowNull: false,
+    defaultValue: NOW,
+  },
+},
+{
+  sequelize: db,
+  modelName: 'Transaction',
+  tableName: 'Transactions',
+  updatedAt: false,
+});
 
 export default Transaction;
