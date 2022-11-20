@@ -1,5 +1,6 @@
 import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
+import Account from './Account';
 
 class User extends Model {
   id!: number;
@@ -26,17 +27,15 @@ User.init({
   accountId: {
     type: INTEGER,
     allowNull: false,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-    references: {
-      model: 'Accounts',
-      key: 'id',
-    },
   },
 }, {
   sequelize: db,
-  modelName: 'Users',
+  modelName: 'User',
+  tableName: 'Users',
   timestamps: false,
 });
+
+Account.hasOne(User, { foreignKey: 'id', as: 'data' });
+User.belongsTo(Account, { foreignKey: 'accountId', as: 'data' });
 
 export default User;
