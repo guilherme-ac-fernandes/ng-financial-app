@@ -43,11 +43,11 @@ export default class UserService {
     try {
       const { id: accountId } = await this._account.create(
         { balance: 100.00 },
-        transaction
+        transaction,
       );
       await this._user.create(
         { username, password: BcryptService.encrypt(password), accountId },
-        transaction
+        transaction,
       );
       await transaction.commit();
       const token = TokenHelpers.createToken(username, accountId);
