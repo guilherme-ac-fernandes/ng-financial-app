@@ -8,3 +8,9 @@ export const login = async (body: ILogin) => {
     .then((response) => response.data);
   return data;
 };
+
+export const register = async (body: ILogin) => {
+  const data = await api.post('/register', body)
+    .then((response) => response.data);
+  return data;
+};
