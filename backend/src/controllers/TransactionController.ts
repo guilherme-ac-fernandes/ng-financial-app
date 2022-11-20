@@ -15,8 +15,11 @@ export default class TransactionController {
   }
 
   public async create(req: Request, res: Response, next: NextFunction) {
-    const { debitedAccountId, creditedAccountId, value } =
-      req.body as ITransaction;
+    const {
+      debitedAccountId,
+      creditedAccountId,
+      value,
+    } = req.body as ITransaction;
     const { code, message, data } = await this._transaction.create({
       creditedAccountId,
       debitedAccountId,

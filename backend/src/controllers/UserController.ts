@@ -32,5 +32,4 @@ export default class CarController {
     if (message) return next({ code, message });
     return res.status(code).json(data);
   }
-
 }
