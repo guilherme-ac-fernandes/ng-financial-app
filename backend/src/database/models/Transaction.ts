@@ -9,36 +9,38 @@ class Transaction extends Model {
   createdAt!: string;
 }
 
-Transaction.init({
-  id: {
-    type: INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
+Transaction.init(
+  {
+    id: {
+      type: INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    debitedAccountId: {
+      type: INTEGER,
+      allowNull: false,
+    },
+    creditedAccountId: {
+      type: INTEGER,
+      allowNull: false,
+    },
+    value: {
+      type: DECIMAL,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DATE,
+      allowNull: false,
+      defaultValue: NOW,
+    },
   },
-  debitedAccountId: {
-    type: INTEGER,
-    allowNull: false,
+  {
+    sequelize: db,
+    modelName: 'Transaction',
+    tableName: 'Transactions',
+    updatedAt: false,
   },
-  creditedAccountId: {
-    type: INTEGER,
-    allowNull: false,
-  },
-  value: {
-    type: DECIMAL,
-    allowNull: false,
-  },
-  createdAt: {
-    type: DATE,
-    allowNull: false,
-    defaultValue: NOW,
-  },
-},
-{
-  sequelize: db,
-  modelName: 'Transaction',
-  tableName: 'Transactions',
-  updatedAt: false,
-});
+);
 
 export default Transaction;
