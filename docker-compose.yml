@@ -7,13 +7,11 @@ services:
       - 3000:3000
     platform: linux/x86_64
     working_dir: /app-frontend
+    volumes:
+      - ./frontend:/app-frontend
     depends_on:
-      backend:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
-      timeout: 10s
-      retries: 5
+      - backend
+
   backend:
     container_name: financial_backend
     build: ./backend
@@ -21,35 +19,31 @@ services:
       - 3001:3001
     platform: linux/x86_64
     working_dir: /app-backend
+    volumes:
+      - ./backend:/app-backend
     depends_on:
-      db:
-        condition: service_healthy
+      - db_postgres
     environment:
       - APP_PORT=3001
       - JWT_SECRET=jwt_secret
-      - DB_USER=postgres
+      - DB_USER=root
       - DB_PASS=123456
-      - DB_HOST=db
+      - DB_HOST=db_postgres
       - DB_PORT=5432
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
-      timeout: 10s
-      retries: 5
-  db:
-    image: postgres
-    container_name: financial_db
-    platform: linux/x86_64
+      - DB_DATABASE=NG_FINANCIAL
+  
+  db_postgres:
+    image: postgres:12
+    container_name: db_postgres
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_PASSWORD=123456
+    platform: linux/x86_64
     restart: 'always'
-    healthcheck:
-      # Hel para postgres proveniente do Github go Peter Evans
-      # source: https://github.com/peter-evans/docker-compose-healthcheck
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    cap_add:
-      - SYS_NICE # Omitir alertas menores
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=NG_FINANCIAL
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+  
