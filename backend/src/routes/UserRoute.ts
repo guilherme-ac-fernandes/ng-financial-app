@@ -17,7 +17,13 @@ route.post(
   Middlewares.UserValidations,
   (req, res, next) => userController.create(req, res, next)
 );
+
 route.post('/login', (req, res, next) => userController.login(req, res, next));
-route.get('/user', (req, res, next) => userController.findAll(req, res, next));
+
+route.get(
+  '/user',
+  Middlewares.auth,
+  (req, res, next) => userController.findAll(req, res, next)
+);
 
 export default route;

@@ -1,14 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
 import UserService from '../services/UserService';
 
+interface NewRequest extends Request {
+  username?: string,
+  accountId?: number,
+}
+
 export default class CarController {
   private _user: UserService;
   constructor(service: UserService) {
     this._user = service;
   }
 
-  public async findAll(_req: Request, res: Response, next: NextFunction) {
-    const { code, message, data } = await this._user.findAll();
+  public async findAll(req: Request, res: Response, next: NextFunction) {
+    const { accountId } = req as NewRequest;
+    const { code, message, data } = await this._user.findAll(Number(accountId));
     if (message) return next({ code, message });
     return res.status(code).json(data);
   }
