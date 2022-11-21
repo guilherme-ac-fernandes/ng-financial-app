@@ -63,13 +63,9 @@ export default function Transactions() {
             balance={balance}
             axiosRequest={axiosRequest}
           />
-        </section>
-      )}
-      {(showTable && transactions.length > 0) && (
-        <>
           <Filters updateTransactions={updateTransactions} />
           <Table transactions={transactions} loading={loading} />
-        </>
+        </section>
       )}
     </main>
   );
