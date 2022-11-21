@@ -10,7 +10,7 @@ export default function DisplayUser({ username, balance, axiosRequest }: Display
   return (
     <header>
       <h2>{username}</h2>
-      <p>{balance}</p>
+      <h2>{`R$ ${balance}`}</h2>
       <TransactionModal axiosRequest={axiosRequest} />
     </header>
   );
