@@ -18,7 +18,7 @@ export default function Table({ transactions }: TableProps) {
       </thead>
       <tbody>
         {transactions.map((transaction, index) => (
-          <tr key={index}>
+          <tr key={`table-${index}`}>
             <td>{index + 1}</td>
             <td>{transaction.debitedAccountId}</td>
             <td>{transaction.creditedAccountId}</td>
