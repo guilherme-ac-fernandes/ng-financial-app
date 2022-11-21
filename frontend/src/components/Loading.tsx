@@ -1,5 +1,9 @@
+import styles from './styles/Loading.module.css';
+
 export default function Loading() {
   return (
-    <h4>Carregando...</h4>
+    <section className={styles.loadingContainer}>
+      <h5>Carregando...</h5>
+    </section>
   );
 }
