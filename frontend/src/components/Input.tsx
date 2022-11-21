@@ -28,6 +28,7 @@ export default function Input({
         onChange={ ({ target }) => setValue(target.value) }
         data-testid={ dataTestId }
         placeholder={ placeholder }
+        min='0'
       />
     </label>
   );
