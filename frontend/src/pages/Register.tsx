@@ -5,6 +5,8 @@ import Input from "../components/Input";
 import { register } from "../helpers/api";
 import { setItem } from "../helpers/localStorage";
 
+import styles from '../styles/Register.module.css';
+
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -35,9 +37,10 @@ export default function Register() {
   }, [username, password, setIsAble]);
 
   return (
-    <section>
-      <h1>Register</h1>
-      <form>
+<section className={styles.registerContainer}>
+      <form className={styles.registerFormContainer}>
+        <h1>NG_CASH</h1>
+        <h4>Cadastro</h4>
         <Input
           id={ 'register-username' }
           label={ 'Nome do usuário:' }
