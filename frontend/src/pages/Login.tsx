@@ -5,6 +5,8 @@ import Input from "../components/Input";
 import { login } from "../helpers/api";
 import { setItem } from "../helpers/localStorage";
 
+import styles from '../styles/Login.module.css';
+
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -34,9 +36,9 @@ export default function Login() {
   }, [username, password, setIsAble]);
 
   return (
-    <section>
-      <h1>Login</h1>
-      <form>
+    <section className={styles.loginContainer}>
+      <form className={styles.loginFormContainer}>
+        <h1>NG_CASH</h1>
         <Input
           id={ 'login-username' }
           label={ 'Nome do usuário:' }

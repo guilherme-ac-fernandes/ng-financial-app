@@ -1,0 +1,23 @@
+.loginContainer {
+  align-items: center;
+  background-color: #202024;
+  color: white;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.loginFormContainer {
+  align-items: center;
+  background-color: hsl(240, 9%, 89%, 0.2);
+  /* border: 1px solid #81d8f7; */
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  height: 60%;
+  justify-content: center;
+  padding: 20px;
+  width: 60%;
+}
