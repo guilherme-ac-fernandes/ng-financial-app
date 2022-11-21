@@ -17,7 +17,6 @@ export default function Table({ transactions }: TableProps) {
     const getUsers = async () => {
       const allUsers = (await getUser()) as unknown as IUser[];
       const { username, accountId } = getItem('user') as unknown as IUser;
-      console.log([...allUsers, { username, accountId }]);
       setUsers([...allUsers, { username, accountId }]);
     };
     getUsers();
