@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Componentes
 import DisplayUser from "../components/DisplayUser";
 import Filters from "../components/Filters";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
 import Table from "../components/Table";
+
+// helpers
 import { getBalance, getTransactionsDefault } from "../helpers/api";
 import { getItem } from "../helpers/localStorage";
+
+// Interfaces
 import { IAccount } from "../interfaces/IAccount";
 import { ITransactions } from "../interfaces/ITransactions";
 import { IUser } from "../interfaces/IUser";
@@ -45,7 +51,6 @@ export default function Transactions() {
             username={ user.username }
             balance={ balance }
           />
-          <p>Modal nova transação</p>
           <Filters />
           <Table transactions={ transactions } />
         </section>
