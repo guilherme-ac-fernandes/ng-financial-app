@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import Button from "./Button";
+import { useNavigate } from 'react-router-dom';
+import styles from './styles/Header.module.css';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -10,15 +10,13 @@ export default function Header() {
   };
 
   return (
-    <header>
-      <h1>NG_Cash</h1>
-      <Button
-        text={ 'Logout' }
-        type={ "button" }
-        disabled={ false }
-        handleSubmit={ handleLogout }
-        dataTestId={ 'logout-button' }
-      />
+    <header className={styles.headerContainer}>
+      <h1 className={styles.headerTitle}>NG_Cash</h1>
+      <div onClick={handleLogout} className={styles.divLogout}>
+        <span className='material-symbols-outlined'>logout</span>
+        {' '}
+        <span>Sair</span>
+      </div>
     </header>
   );
 }
