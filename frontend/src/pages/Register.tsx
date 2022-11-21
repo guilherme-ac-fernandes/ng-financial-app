@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { register } from "../helpers/api";
+import { setItem } from "../helpers/localStorage";
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -12,18 +13,15 @@ export default function Register() {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-
     try {
       setErroRegisterAlert(false);
       const user = await register({ username, password });
-      console.log(user);
-      
+      setItem('user', user);
       localStorage.setItem('user', JSON.stringify(user));
       return navigate('/transactions');
     } catch (error) {
       setErroRegisterAlert(true);
     }
-
   };
 
   useEffect(() => {
