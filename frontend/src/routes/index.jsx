@@ -22,7 +22,7 @@ export default function FinancialAppRoutes() {
     <Routes>
        <Route exact path="/" element={ loggedIn ?  <Transactions /> : <Login /> } />
        <Route exact path="/register" element={ <Register /> } />
-       <Route exact path="/transactions/:id" element={ <Transactions /> } />
+       <Route exact path="/transactions/" element={ <Transactions /> } />
        <Route exact path="*" element={ <NotFound /> } />
      </Routes>
   );
