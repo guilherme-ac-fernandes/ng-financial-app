@@ -17,6 +17,9 @@ import { IAccount } from '../interfaces/IAccount';
 import { ITransactions } from '../interfaces/ITransactions';
 import { IUser } from '../interfaces/IUser';
 
+// Style
+import styles from './styles/Transactions.module.css';
+
 export default function Transactions() {
   const [user, setUser] = useState<IUser>({});
   const [balance, setBalance] = useState<string>('');
@@ -46,7 +49,7 @@ export default function Transactions() {
   };
 
   return (
-    <main>
+    <main className={styles.transactionsContainer}>
       <Header />
       {loading ? (
         <Loading />
