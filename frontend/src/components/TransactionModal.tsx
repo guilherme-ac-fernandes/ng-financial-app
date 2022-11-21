@@ -48,9 +48,9 @@ export default function TransactionModal({ axiosRequest }: TransactionModalProps
   };
 
   return (
-    <>
+    <section>
       <button onClick={handleShow}>
-        <span className='material-symbols-outlined'>Nova Transação</span>
+        <span>Nova Transação</span>
       </button>
 
       <Modal
@@ -91,6 +91,6 @@ export default function TransactionModal({ axiosRequest }: TransactionModalProps
           </button>
         </Modal.Footer>
       </Modal>
-    </>
+    </section>
   );
 }
