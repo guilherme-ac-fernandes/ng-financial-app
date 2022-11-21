@@ -43,3 +43,14 @@ export const getUser = async () => {
     ).then((response) => response.data);
   return data;
 };
+
+export const createTransactions = async (creditedAccountId: number, value: string) => {
+  const user = getItem('user') as unknown as IUser;
+  const body = { debitedAccountId: user.accountId, creditedAccountId, value };
+  const data = await api.post(
+    '/transactions',
+    body,
+    { headers: { Authorization: `${user.token}` } },
+    ).then((response) => response.data);
+  return data;
+};
