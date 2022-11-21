@@ -8,3 +8,13 @@
   padding: 4px 12px;
   width: 50%;
 }
+
+.buttonContainer:hover {
+  background-color: #80089b;
+}
+
+.buttonContainer:disabled {
+  background-color: #6f6174;
+  cursor: not-allowed;
+
+}
