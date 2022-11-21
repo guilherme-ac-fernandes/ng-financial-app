@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import NotFound from '../components/NotFound';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Transactions from '../pages/Transactions';
@@ -21,7 +22,8 @@ export default function FinancialAppRoutes() {
     <Routes>
        <Route exact path="/" element={ loggedIn ?  <Transactions /> : <Login /> } />
        <Route exact path="/register" element={ <Register /> } />
-       <Route exact path="/transactions" element={ <Transactions /> } />
+       <Route exact path="/transactions/:id" element={ <Transactions /> } />
+       <Route exact path="*" element={ <NotFound /> } />
      </Routes>
   );
 }
