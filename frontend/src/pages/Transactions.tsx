@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Componentes
-import DisplayUser from "../components/DisplayUser";
-import Filters from "../components/Filters";
-import Header from "../components/Header";
-import Loading from "../components/Loading";
-import Table from "../components/Table";
+import DisplayUser from '../components/DisplayUser';
+import Filters from '../components/Filters';
+import Header from '../components/Header';
+import Loading from '../components/Loading';
+import Table from '../components/Table';
 
 // helpers
-import { getBalance, getTransactionsDefault } from "../helpers/api";
-import { getItem } from "../helpers/localStorage";
+import { getBalance, getTransactionsDefault } from '../helpers/api';
+import { getItem } from '../helpers/localStorage';
 
 // Interfaces
-import { IAccount } from "../interfaces/IAccount";
-import { ITransactions } from "../interfaces/ITransactions";
-import { IUser } from "../interfaces/IUser";
+import { IAccount } from '../interfaces/IAccount';
+import { ITransactions } from '../interfaces/ITransactions';
+import { IUser } from '../interfaces/IUser';
 
 export default function Transactions() {
   const [user, setUser] = useState<IUser>({});
@@ -34,9 +34,10 @@ export default function Transactions() {
   }, [navigate]);
 
   const axiosRequest = async () => {
-    const balanceAxios = await getBalance() as unknown as IAccount;
+    const balanceAxios = (await getBalance()) as unknown as IAccount;
     setBalance(balanceAxios.balance as string);
-    const transactionsAxios = await getTransactionsDefault() as unknown as ITransactions[];
+    const transactionsAxios =
+      (await getTransactionsDefault()) as unknown as ITransactions[];
     setTransactions(transactionsAxios);
   };
 
@@ -45,21 +46,21 @@ export default function Transactions() {
   };
 
   return (
-    <main> 
+    <main>
       <Header />
-      { loading ? (
+      {loading ? (
         <Loading />
       ) : (
         <section>
           <DisplayUser
-            username={ user.username }
-            balance={ balance }
-            axiosRequest={ axiosRequest }
+            username={user.username}
+            balance={balance}
+            axiosRequest={axiosRequest}
           />
-          <Filters updateTransactions={ updateTransactions } />
-          <Table transactions={ transactions } />
+          <Filters updateTransactions={updateTransactions} />
+          <Table transactions={transactions} />
         </section>
-      ) }
+      )}
     </main>
   );
 }
