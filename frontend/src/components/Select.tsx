@@ -1,5 +1,7 @@
 import { IUser } from '../interfaces/IUser';
 
+import styles from './styles/Select.module.css';
+
 interface InputProps {
   id: string;
   label: string;
@@ -18,11 +20,11 @@ export default function Select({
   users,
 }: InputProps) {
   return (
-    <label htmlFor={id}>
+    <label htmlFor={id} className={styles.labelContainer}>
       {label}
       <select
         id={id}
-        className='select_input'
+        className={styles.selectContainer}
         value={value}
         onChange={({ target }) => setValue(target.value)}
         data-testid={dataTestId}
