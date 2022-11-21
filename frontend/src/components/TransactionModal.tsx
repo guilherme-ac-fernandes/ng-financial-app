@@ -37,7 +37,6 @@ export default function TransactionModal({ axiosRequest }: TransactionModalProps
   const handleShow = () => setShow(true);
 
   const handleSubmit = async () => {
-    console.log('nova transação', creditedAccountId, value);
     try {
       setInvalidTransactionAlert(false);
       await createTransactions(Number(creditedAccountId), value);
