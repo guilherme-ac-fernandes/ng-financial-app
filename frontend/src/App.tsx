@@ -1,5 +1,5 @@
 import FinancialAppRoutes from './routes';
-import './styles/App.css';
+import './App.css';
 
 export default function App() {
   return (

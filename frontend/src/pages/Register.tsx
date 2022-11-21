@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import { register } from "../helpers/api";
 import { setItem } from "../helpers/localStorage";
 
-import styles from '../styles/Register.module.css';
+import styles from './styles/Register.module.css';
 
 export default function Register() {
   const [username, setUsername] = useState('');

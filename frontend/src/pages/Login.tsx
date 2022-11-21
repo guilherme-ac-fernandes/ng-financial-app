@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import { login } from "../helpers/api";
 import { setItem } from "../helpers/localStorage";
 
-import styles from '../styles/Login.module.css';
+import styles from './styles/Login.module.css';
 
 export default function Login() {
   const [username, setUsername] = useState('');
