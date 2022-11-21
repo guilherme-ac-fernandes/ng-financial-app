@@ -1,5 +1,9 @@
+import styles from './styles/NotFound.module.css';
+
 export default function NotFound() {
   return (
-    <h1>NotFound</h1>
+    <section className={styles.notFoundContainer}>
+      <h5>Página não encontrada</h5>
+    </section>
   );
 }
