@@ -34,3 +34,12 @@ export const getTransactionsDefault = async () => {
     ).then((response) => response.data);
   return data;
 };
+
+export const getUser = async () => {
+  const user = getItem('user') as unknown as IUser;
+  const data = await api.get(
+    '/user',
+    { headers: { Authorization: `${user.token}` } },
+    ).then((response) => response.data);
+  return data;
+};
