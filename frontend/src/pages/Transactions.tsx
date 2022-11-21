@@ -40,6 +40,10 @@ export default function Transactions() {
     setTransactions(transactionsAxios);
   };
 
+  const updateTransactions = (payload: ITransactions[]) => {
+    setTransactions(payload);
+  };
+
   return (
     <main> 
       <Header />
@@ -52,7 +56,7 @@ export default function Transactions() {
             balance={ balance }
             axiosRequest={ axiosRequest }
           />
-          <Filters />
+          <Filters updateTransactions={ updateTransactions } />
           <Table transactions={ transactions } />
         </section>
       ) }
