@@ -1,3 +1,5 @@
+import styles from './styles/Input.module.css';
+
 interface InputProps {
   id: string,
   label: string,
@@ -18,11 +20,11 @@ export default function Input({
   placeholder,
 }: InputProps) {
   return (
-    <label htmlFor={ id }>
+    <label htmlFor={ id } className={styles.labelContainer}>
       { label }
       <input
         id={ id }
-        className='login_input'
+        className={styles.inputContainer}
         type={ type }
         value={ value }
         onChange={ ({ target }) => setValue(target.value) }
