@@ -5,6 +5,7 @@ import { ICreateAccount } from '../interfaces/IAccount';
 import { ICreateTransaction, ITransaction } from '../interfaces/ITransaction';
 import { IQuery } from '../interfaces/IQuery';
 import { IResponse } from '../interfaces/IResponse';
+import { sumBalance, subBalance } from '../helpers/operation';
 
 const TRANSACTION_NOT_FOUND = { code: 404, message: 'Transactions not found' };
 
@@ -29,9 +30,9 @@ export default class TransactionService {
       const transactionCreated = await this._transaction
         .create({ debitedAccountId, creditedAccountId, value }, transaction);
       await this._account
-        .update(debitedAccountId, { balance: Number(debitUser.balance) - value }, transaction);
+        .update(debitedAccountId, subBalance(debitUser.balance, value), transaction);
       await this._account
-        .update(creditedAccountId, { balance: Number(creditUser.balance) + value }, transaction);
+        .update(creditedAccountId, sumBalance(creditUser.balance, value), transaction);
       await transaction.commit();
       return { code: 201, data: transactionCreated };
     } catch (error) {
