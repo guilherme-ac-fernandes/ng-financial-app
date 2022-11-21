@@ -25,15 +25,18 @@ export default function Transactions() {
   const [balance, setBalance] = useState<string>('');
   const [transactions, setTransactions] = useState<ITransactions[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [showTable, setShowTable] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
+    setShowTable(false);
     const userLocalStorage = getItem('user') as unknown as IUser;
     if (!userLocalStorage) return navigate('/');
     setUser(userLocalStorage);
     axiosRequest();
     setLoading(false);
+    setShowTable(true);
   }, [navigate]);
 
   const axiosRequest = async () => {
@@ -60,9 +63,13 @@ export default function Transactions() {
             balance={balance}
             axiosRequest={axiosRequest}
           />
-          <Filters updateTransactions={updateTransactions} />
-          <Table transactions={transactions} />
         </section>
+      )}
+      {(showTable && transactions.length > 0) && (
+        <>
+          <Filters updateTransactions={updateTransactions} />
+          <Table transactions={transactions} loading={loading} />
+        </>
       )}
     </main>
   );

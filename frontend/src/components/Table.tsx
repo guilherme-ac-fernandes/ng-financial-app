@@ -8,9 +8,10 @@ import EmptyTable from './EmptyTable';
 
 interface TableProps {
   transactions: ITransactions[] | [];
+  loading: boolean,
 }
 
-export default function Table({ transactions }: TableProps) {
+export default function Table({ transactions, loading }: TableProps) {
   const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Table({ transactions }: TableProps) {
 
   return (
     <>
-      {transactions.length === 0 ? (
+      {(!loading && transactions.length === 0) ? (
         <EmptyTable />
       ) : (
         <table>
