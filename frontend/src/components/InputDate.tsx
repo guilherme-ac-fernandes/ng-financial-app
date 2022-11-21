@@ -1,3 +1,5 @@
+import styles from './styles/InputDate.module.css';
+
 interface InputDateProps {
   id: string,
   label: string,
@@ -14,11 +16,11 @@ export default function InputDate({
   dataTestId,
 }: InputDateProps) {
   return (
-    <label htmlFor={ id }>
+    <label htmlFor={ id } className={styles.labelContainer}>
       { label }
       <input
         id={ id }
-        className='date_input'
+        className={styles.inputContainer}
         type='date'
         value={ value }
         onChange={ ({ target }) => setValue(target.value) }
