@@ -1,3 +1,5 @@
+import styles from './styles/InputRadio.module.css';
+
 interface InputRadioProps {
   id: string;
   label: string;
@@ -14,17 +16,17 @@ export default function InputRadio({
   dataTestId,
 }: InputRadioProps) {
   return (
-    <label htmlFor={id}>
-      {label}
+    <label htmlFor={id} className={styles.labelContainer}>
       <input
         id={id}
-        className='radio_input'
+        className={styles.inputContainer}
         type='radio'
         name='search'
         value={value}
         onChange={({ target }) => setValue(target.value)}
         data-testid={dataTestId}
-      />
+        />
+      {label}
     </label>
   );
 }
