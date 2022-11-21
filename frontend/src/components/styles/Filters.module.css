@@ -1,0 +1,21 @@
+.filtersContainer {
+  border: solid 1px rgb(255, 255, 255, 0.3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 5px;
+  width: 80%;
+  padding: 2%;
+  margin: 30px auto;
+}
+
+.filterButton {
+  width: 15%;
+}
+
+.radioContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
