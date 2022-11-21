@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import { register } from "../helpers/api";
-import { setItem } from "../helpers/localStorage";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
+import Input from '../components/Input';
+import { register } from '../helpers/api';
+import { setItem } from '../helpers/localStorage';
 
 import styles from './styles/Register.module.css';
 
@@ -11,7 +11,7 @@ export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isAble, setIsAble] = useState(true);
-  const [erroRegisterAlert, setErroRegisterAlert] = useState(false); 
+  const [erroRegisterAlert, setErroRegisterAlert] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async () => {
@@ -30,52 +30,53 @@ export default function Register() {
     // Regex para validação da senha proveniente do Stack OverFlow após adaptação
     // source: https://pt.stackoverflow.com/questions/373574/regex-para-senha-forte#:~:text=1%20Letra%20Maiúscula%20no%20m%C3%ADnimo,%2C%20bb%20%2C%2044%20%2C%20etc
     const regexPassword = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/;
-    if(username.length > 3 && password.match(regexPassword)) {
+    if (username.length > 3 && password.match(regexPassword)) {
       return setIsAble(false);
     }
     setIsAble(true);
   }, [username, password, setIsAble]);
 
   return (
-<section className={styles.registerContainer}>
+    <section className={styles.registerContainer}>
       <form className={styles.registerFormContainer}>
         <h1>NG_CASH</h1>
         <h4>Cadastro</h4>
         <Input
-          id={ 'register-username' }
-          label={ 'Nome do usuário:' }
-          type={ 'text' }
-          value={ username }
-          setValue={ setUsername }
-          dataTestId={ 'register-username' }
-          placeholder={ 'username' }
+          id={'register-username'}
+          label={'Nome do usuário:'}
+          type={'text'}
+          value={username}
+          setValue={setUsername}
+          dataTestId={'register-username'}
+          placeholder={'username'}
         />
         <Input
-          id={ 'register-password' }
-          label={ 'Senha do usuário:' }
-          type={ "password" }
-          value={ password }
-          setValue={ setPassword }
-          dataTestId={ 'register-password' }
-          placeholder={ '********' }
+          id={'register-password'}
+          label={'Senha do usuário:'}
+          type={'password'}
+          value={password}
+          setValue={setPassword}
+          dataTestId={'register-password'}
+          placeholder={'********'}
         />
         <Button
-          text={ 'Voltar' }
-          type={ "button" }
-          disabled={ false }
-          handleSubmit={ () => navigate('/') }
-          dataTestId={ 'return-login-button' }
+          text={'Voltar'}
+          type={'button'}
+          disabled={false}
+          handleSubmit={() => navigate('/')}
+          dataTestId={'return-login-button'}
         />
         <Button
-          text={ 'Register' }
-          type={ "button" }
-          disabled={ isAble }
-          handleSubmit={ handleRegister }
-          dataTestId={ 'register-button' }
+          text={'Register'}
+          type={'button'}
+          disabled={isAble}
+          handleSubmit={handleRegister}
+          dataTestId={'register-button'}
         />
       </form>
-      {erroRegisterAlert && <h3>Erro no cadastro do usuário, tente novamente!</h3>}
+      {erroRegisterAlert && (
+        <h3>Erro no cadastro do usuário, tente novamente!</h3>
+      )}
     </section>
   );
 }
-
