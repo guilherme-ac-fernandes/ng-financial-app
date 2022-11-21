@@ -5,7 +5,11 @@ import { IUser } from '../interfaces/IUser';
 import Input from './Input';
 import Select from './Select';
 
-export default function TransactionModal() {
+interface TransactionModalProps {
+  axiosRequest: () => void;
+}
+
+export default function TransactionModal({ axiosRequest }: TransactionModalProps) {
   const [show, setShow] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
   const [creditedAccountId, setCreditedAccountId] = useState('');
@@ -38,6 +42,7 @@ export default function TransactionModal() {
       setInvalidTransactionAlert(false);
       await createTransactions(Number(creditedAccountId), value);
       handleClose();
+      axiosRequest();
     } catch (error) {
       setInvalidTransactionAlert(true);
     }

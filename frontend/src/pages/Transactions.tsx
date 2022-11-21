@@ -50,6 +50,7 @@ export default function Transactions() {
           <DisplayUser
             username={ user.username }
             balance={ balance }
+            axiosRequest={ axiosRequest }
           />
           <Filters />
           <Table transactions={ transactions } />
