@@ -57,6 +57,13 @@ export default function Register() {
           placeholder={ '********' }
         />
         <Button
+          text={ 'Voltar' }
+          type={ "button" }
+          disabled={ false }
+          handleSubmit={ () => navigate('/') }
+          dataTestId={ 'return-login-button' }
+        />
+        <Button
           text={ 'Register' }
           type={ "button" }
           disabled={ isAble }
