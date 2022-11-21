@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { getUser } from '../helpers/api';
+import { createTransactions, getUser } from '../helpers/api';
 import { IUser } from '../interfaces/IUser';
 import Input from './Input';
 import Select from './Select';
@@ -8,8 +8,11 @@ import Select from './Select';
 export default function TransactionModal() {
   const [show, setShow] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
-  const [select, setSelect] = useState('');
+  const [creditedAccountId, setCreditedAccountId] = useState('');
   const [value, setValue] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [invalidTransactionAlert, setInvalidTransactionAlert] = useState(false);
+
 
   useEffect(() => {
     const getUsers = async () => {
@@ -19,13 +22,31 @@ export default function TransactionModal() {
     getUsers();
   }, []);
 
+  useEffect(() => {
+    if (creditedAccountId !== '' && value !== '') {
+      return setIsDisabled(false);
+    }
+    return setIsDisabled(true);
+  }, [creditedAccountId, value, setIsDisabled]);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleSubmit = async () => {
+    console.log('nova transação', creditedAccountId, value);
+    try {
+      setInvalidTransactionAlert(false);
+      await createTransactions(Number(creditedAccountId), value);
+      handleClose();
+    } catch (error) {
+      setInvalidTransactionAlert(true);
+    }
+  };
 
   return (
     <>
       <button onClick={handleShow}>
-        <span className='material-symbols-outlined'>add</span>
+        <span className='material-symbols-outlined'>Nova Transação</span>
       </button>
 
       <Modal
@@ -42,26 +63,28 @@ export default function TransactionModal() {
             <Select
               id={'select-new-transaction'}
               label={'Transferência para:'}
-              value={ select }
-              setValue={ setSelect }
+              value={creditedAccountId}
+              setValue={setCreditedAccountId}
               dataTestId={'select-new-transaction'}
-              users={ users }
+              users={users}
             />
             <Input
               id={'value-new-transaction'}
               label={'Valor:'}
               type={'number'}
               value={value}
-              setValue={ setValue }
+              setValue={setValue}
               dataTestId={'value-new-transaction'}
               placeholder={'username'}
             />
-              
           </form>
+          {invalidTransactionAlert && <p>Transação cancelada, valor maior que saldo da conta.</p>}
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={handleClose}>Fechar</button>
-          <button>Salvar</button>
+          <button onClick={handleClose}>Cancelar</button>
+          <button disabled={isDisabled} onClick={handleSubmit}>
+            Transferir
+          </button>
         </Modal.Footer>
       </Modal>
     </>
