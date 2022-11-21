@@ -39,6 +39,7 @@ export default function Login() {
     <section className={styles.loginContainer}>
       <form className={styles.loginFormContainer}>
         <h1>NG_CASH</h1>
+        <h4>Login</h4>
         <Input
           id={ 'login-username' }
           label={ 'Nome do usuário:' }
