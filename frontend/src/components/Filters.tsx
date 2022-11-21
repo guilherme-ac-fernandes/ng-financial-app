@@ -1,4 +1,12 @@
 import { useState } from 'react';
+
+
+// Componentes
+import Button from './Button';
+import InputDate from './InputDate';
+import InputRadio from './InputRadio';
+
+// helpers
 import {
   getTransactionsByDate,
   getTransactionsBySearch,
@@ -6,10 +14,11 @@ import {
   getTransactionsDefault,
 } from '../helpers/api';
 
+// Interfaces
 import { ITransactions } from '../interfaces/ITransactions';
-import Button from './Button';
-import InputDate from './InputDate';
-import InputRadio from './InputRadio';
+
+// Styles
+import styles from './styles/Filters.module.css';
 
 interface FiltersProps {
   updateTransactions: (payload: ITransactions[]) => void;
@@ -39,16 +48,16 @@ export default function Filters({ updateTransactions }: FiltersProps) {
   };
 
   return (
-    <form>
+    <form className={styles.filtersContainer}>
       <InputDate
         id={'date-input'}
-        label={'Data:'}
+        label={''}
         value={date}
         setValue={setDate}
         dataTestId={'date-input'}
       />
 
-      <div>
+      <div className={styles.radioContainer}>
         <InputRadio
           id={'radio-input-all'}
           label={'Todas'}
@@ -83,6 +92,7 @@ export default function Filters({ updateTransactions }: FiltersProps) {
           setSearch('');
         }}
         dataTestId={'filter-button'}
+        buttonClass={ styles.filterButton }
       />
     </form>
   );
