@@ -1,7 +1,7 @@
 interface InputProps {
   id: string,
   label: string,
-  type: 'text' | 'password',
+  type: 'text' | 'password' | 'number',
   value: string,
   setValue: (value: string) => void,
   dataTestId: string,
