@@ -1,4 +1,9 @@
+import { useEffect, useState } from 'react';
+import { getUser } from '../helpers/api';
+import { formatDate, formatHour } from '../helpers/dateHelper';
+import { getItem } from '../helpers/localStorage';
 import { ITransactions } from '../interfaces/ITransactions';
+import { IUser } from '../interfaces/IUser';
 import EmptyTable from './EmptyTable';
 
 interface TableProps {
@@ -6,6 +11,22 @@ interface TableProps {
 }
 
 export default function Table({ transactions }: TableProps) {
+  const [users, setUsers] = useState<IUser[]>([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const allUsers = (await getUser()) as unknown as IUser[];
+      const { username, accountId } = getItem('user') as unknown as IUser;
+      console.log([...allUsers, { username, accountId }]);
+      setUsers([...allUsers, { username, accountId }]);
+    };
+    getUsers();
+  }, []);
+
+  const findUser = (tableId: number) => {
+    return users.find(({ accountId }) => accountId === tableId)?.username;
+  };
+
   return (
     <>
       {transactions.length === 0 ? (
@@ -15,20 +36,22 @@ export default function Table({ transactions }: TableProps) {
           <thead>
             <tr>
               <th>Item</th>
-              <th>debitedAccountId</th>
-              <th>creditedAccountId</th>
+              <th>Realizado por</th>
+              <th>Recebido por</th>
               <th>Value</th>
               <th>Date</th>
+              <th>Horário</th>
             </tr>
           </thead>
           <tbody>
             {transactions.map((transaction, index) => (
               <tr key={`table-${index}`}>
                 <td>{index + 1}</td>
-                <td>{transaction.debitedAccountId}</td>
-                <td>{transaction.creditedAccountId}</td>
-                <td>{transaction.value}</td>
-                <td>{transaction.createdAt}</td>
+                <td>{findUser(transaction.debitedAccountId)}</td>
+                <td>{findUser(transaction.creditedAccountId)}</td>
+                <td>{`RS ${transaction.value}`}</td>
+                <td>{formatDate(transaction.createdAt as string)}</td>
+                <td>{formatHour(transaction.createdAt as string)}</td>
               </tr>
             ))}
           </tbody>
