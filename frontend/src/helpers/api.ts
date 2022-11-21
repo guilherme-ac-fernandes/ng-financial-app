@@ -54,3 +54,30 @@ export const createTransactions = async (creditedAccountId: number, value: strin
     ).then((response) => response.data);
   return data;
 };
+
+export const getTransactionsBySearch = async (search: string) => {
+  const user = getItem('user') as unknown as IUser;
+  const data = await api.get(
+    `/transactions/filter?search=${search}`,
+    { headers: { Authorization: `${user.token}` } },
+    ).then((response) => response.data);
+  return data;
+};
+
+export const getTransactionsByDate = async (date: string) => {
+  const user = getItem('user') as unknown as IUser; 
+  const data = await api.get(
+    `/transactions/filter?date=${date}`,
+    { headers: { Authorization: `${user.token}` } },
+    ).then((response) => response.data);
+  return data;
+};
+
+export const getTransactionsBySearchAndDate = async (search: string, date: string) => {
+  const user = getItem('user') as unknown as IUser;
+  const data = await api.get(
+    `/transactions/filter?search=${search}&date=${date}`,
+    { headers: { Authorization: `${user.token}` } },
+    ).then((response) => response.data);
+  return data;
+};
