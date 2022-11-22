@@ -38,11 +38,6 @@ describe('Rota /account', () => {
   });
 
   describe('Rota GET /:id', () => {
-    // before(async () =>
-    //   sinon.stub(AccountModel.prototype, 'findByPk').resolves(ACCOUNT_USER)
-    // );
-    // after(() => (AccountModel.prototype.findByPk as sinon.SinonStub).restore());
-
     it('Caso de falha - Token Inválido', async () => {
       const result = await chai
         .request(app)
