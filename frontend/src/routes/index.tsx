@@ -7,23 +7,23 @@ import Transactions from '../pages/Transactions';
 
 // Estruturação do React-Router-Dom proveniente do Stack OverFlow
 // source: https://stackoverflow.com/questions/69868956/how-can-i-redirect-in-react-router-v6
-export default function FinancialAppRoutes() {
-  const [loggedIn, setLoggedIn] = useState(false);
+export default function FinancialAppRoutes () {
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('user')
     if (!user || user.length > 0) {
-      return setLoggedIn(false);
+      return setLoggedIn(false)
     }
-    return setLoggedIn(true);
-  }, []);
+    return setLoggedIn(true)
+  }, [])
 
   return (
     <Routes>
-       <Route exact path="/" element={ loggedIn ?  <Transactions /> : <Login /> } />
-       <Route exact path="/register" element={ <Register /> } />
-       <Route exact path="/transactions/:id" element={ <Transactions /> } />
-       <Route exact path="*" element={ <NotFound /> } />
+       <Route path="/register" element={ <Register /> } />
+       <Route path="/transactions/:id" element={ <Transactions /> } />
+       <Route path="/" element={ loggedIn ? <Transactions /> : <Login /> } />
+       <Route path="*" element={ <NotFound /> } />
      </Routes>
-  );
+  )
 }
