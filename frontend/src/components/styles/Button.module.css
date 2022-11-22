@@ -7,6 +7,7 @@
   cursor: pointer;
   padding: 4px 12px;
   width: 50%;
+  min-width: 150px;
 }
 
 .buttonContainer:hover {
