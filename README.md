@@ -26,6 +26,9 @@ Para rodar a aplicação dockerizada, instalar as dependências e iniciar as apl
 <-- na raiz do projeto -->
 npm run compose:up // para subir o docker-compose
 npm run back:acess // para acessar o container do backend
+npm run db:migrate // para criar as tabelas e popular no banco de caso
+
+<-- caso o banco de dados não exista ainda -->
 npm run db:reset // para criar o banco de dados
 
 Para parar a aplicação dockerizada:
