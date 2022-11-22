@@ -4,7 +4,7 @@
   "description": "Aplicativo de transações monetárias entre usuários cadastrados",
   "main": "",
   "scripts": {
-    "compose:up": "docker-compose up -d",
+    "compose:up": "docker-compose up -d --build",
     "compose:down": "docker-compose down",
     "back:acess": "docker exec -it financial_backend /bin/sh",
     "db:reset": "npm run build && npm run db:reset"
