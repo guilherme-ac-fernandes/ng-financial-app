@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+// Interfaces
 import { ILogin } from '../interfaces/ILogin';
 import { IUser } from '../interfaces/IUser';
 import { getItem } from './localStorage';

@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// Componentes
 import Button from '../components/Button';
 import Input from '../components/Input';
+
+// helpers
 import { login } from '../helpers/api';
 import { setItem } from '../helpers/localStorage';
 
+// Styles
 import styles from './styles/Login.module.css';
 
 export default function Login() {

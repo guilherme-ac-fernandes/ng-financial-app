@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// Componentes
 import Button from '../components/Button';
 import Input from '../components/Input';
+
+// helpers
 import { register } from '../helpers/api';
 import { setItem } from '../helpers/localStorage';
 
+// Styles
 import styles from './styles/Register.module.css';
 
 export default function Register() {
