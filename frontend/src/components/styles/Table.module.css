@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
