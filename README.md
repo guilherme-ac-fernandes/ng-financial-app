@@ -8,9 +8,11 @@ Consiste em uma aplicação full-stack dockerizada para realização de transfer
 * Utilizando os princípios SOLID e Programação Orientada a Objetos
 * Aplicando Arquitetura de Software, com as camadas de Modelo, Serviço e de Controladores
 * Testes de integração realizados com Mocha, Chai e Sinon
+* Endpoints: _[acessar](https://github.com/guilherme-ac-fernandes/ng-financial-app/tree/main/backend)_
 
 ### FrontEnd:
 * Construído com React, React Hooks, Typescript, Bootstrap, React-Bootstrap e CSS
+* Páginas: _[acessar](https://github.com/guilherme-ac-fernandes/ng-financial-app/tree/main/frontend)_
 
 ### Instruções
 
