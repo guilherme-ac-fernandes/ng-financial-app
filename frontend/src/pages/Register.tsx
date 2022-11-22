@@ -20,7 +20,7 @@ export default function Register() {
       const user = await register({ username, password });
       setItem('user', user);
       localStorage.setItem('user', JSON.stringify(user));
-      return navigate('/transactions');
+      return navigate(`/transactions/${user.accountId}`);
     } catch (error) {
       setErroRegisterAlert(true);
     }

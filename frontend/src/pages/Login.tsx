@@ -19,7 +19,7 @@ export default function Login() {
       setInvalidUserAlert(false);
       const user = await login({ username, password });
       setItem('user', user);
-      return navigate('/transactions');
+      return navigate(`/transactions/${user.accountId}`);
     } catch (error) {
       setInvalidUserAlert(true);
     }
