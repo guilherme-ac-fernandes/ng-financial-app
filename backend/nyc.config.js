@@ -7,6 +7,7 @@ module.exports = {
     'src/database/migrations',
     'src/database/seeders',
     'src/api',
+    'src/models',
   ],
   include: ['src/**/*.ts']
 };
