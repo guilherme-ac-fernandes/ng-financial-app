@@ -58,8 +58,6 @@ exit // para sair do container do backend
  
 </details>
 
-<br />
-
 ### Demonstração
 
 <br />
