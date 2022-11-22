@@ -9,7 +9,8 @@
   gap: 30px;
 }
 
-.modalButton {
+.modalButton,
+.openModalButton {
   background-color: #6e1383;
   border: none;
   border-radius: 2%;
@@ -17,13 +18,16 @@
   color: white;
   cursor: pointer;
   padding: 4px 12px;
+  min-width: 150px;
 }
 
-.modalButton:hover {
+.modalButton:hover,
+.openModalButton:hover {
   background-color: #80089b;
 }
 
-.modalButton:disabled {
+.modalButton:disabled,
+.openModalButton:disabled {
   background-color: #6f6174;
   cursor: not-allowed;
 }

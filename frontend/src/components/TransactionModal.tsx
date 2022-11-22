@@ -58,7 +58,7 @@ export default function TransactionModal({
 
   return (
     <section className={styles.modalContainer}>
-      <button onClick={handleShow}>
+      <button onClick={handleShow} className={styles.openModalButton}>
         <span>Nova Transação</span>
       </button>
 
