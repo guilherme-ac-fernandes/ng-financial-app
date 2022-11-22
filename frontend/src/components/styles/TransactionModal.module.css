@@ -1,0 +1,34 @@
+.modalContainer {
+  background-color: #202024;
+}
+
+.buttonContainer {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 30px;
+}
+
+.modalButton {
+  background-color: #6e1383;
+  border: none;
+  border-radius: 2%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+  padding: 4px 12px;
+}
+
+.modalButton:hover {
+  background-color: #80089b;
+}
+
+.modalButton:disabled {
+  background-color: #6f6174;
+  cursor: not-allowed;
+}
+
+.modalAlert {
+  margin-top: 30px;
+  color: red;
+}

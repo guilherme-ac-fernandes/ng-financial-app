@@ -5,18 +5,21 @@ import { IUser } from '../interfaces/IUser';
 import Input from './Input';
 import Select from './Select';
 
+import styles from './styles/TransactionModal.module.css';
+
 interface TransactionModalProps {
   axiosRequest: () => void;
 }
 
-export default function TransactionModal({ axiosRequest }: TransactionModalProps) {
+export default function TransactionModal({
+  axiosRequest,
+}: TransactionModalProps) {
   const [show, setShow] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
   const [creditedAccountId, setCreditedAccountId] = useState('');
   const [value, setValue] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [invalidTransactionAlert, setInvalidTransactionAlert] = useState(false);
-
 
   useEffect(() => {
     const getUsers = async () => {
@@ -33,13 +36,19 @@ export default function TransactionModal({ axiosRequest }: TransactionModalProps
     return setIsDisabled(true);
   }, [creditedAccountId, value, setIsDisabled]);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setCreditedAccountId('');
+    setValue('');
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
 
   const handleSubmit = async () => {
     try {
       setInvalidTransactionAlert(false);
       await createTransactions(Number(creditedAccountId), value);
+      setCreditedAccountId('');
+      setValue('');
       handleClose();
       axiosRequest();
     } catch (error) {
@@ -48,7 +57,7 @@ export default function TransactionModal({ axiosRequest }: TransactionModalProps
   };
 
   return (
-    <section>
+    <section className={styles.modalContainer}>
       <button onClick={handleShow}>
         <span>Nova Transação</span>
       </button>
@@ -79,14 +88,24 @@ export default function TransactionModal({ axiosRequest }: TransactionModalProps
               value={value}
               setValue={setValue}
               dataTestId={'value-new-transaction'}
-              placeholder={'username'}
+              placeholder={'Exemplo: 10 reais'}
             />
           </form>
-          {invalidTransactionAlert && <p>Transação cancelada, valor maior que saldo da conta.</p>}
+          {invalidTransactionAlert && (
+            <p className={styles.modalAlert}>
+              Transação cancelada, valor maior que saldo da conta.
+            </p>
+          )}
         </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose}>Cancelar</button>
-          <button disabled={isDisabled} onClick={handleSubmit}>
+        <Modal.Footer className={styles.buttonContainer}>
+          <button className={styles.modalButton} onClick={handleClose}>
+            Cancelar
+          </button>
+          <button
+            className={styles.modalButton}
+            disabled={isDisabled}
+            onClick={handleSubmit}
+          >
             Transferir
           </button>
         </Modal.Footer>
