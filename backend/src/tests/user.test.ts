@@ -11,7 +11,7 @@ import UserModel from '../models/UserModel';
 import AccountModel from '../models/AccountModel';
 
 // Mocks
-import { ACCOUNT_USER } from './mocks/account.mock';
+import { ACCOUNT_USER_1 } from './mocks/account.mock';
 import {
   ALL_USERS,
   ALL_USERS_EXCLUDE_FIELDS,
@@ -30,7 +30,7 @@ describe('Rota de Usuário', () => {
   describe('Rota POST /register', () => {
     before(async () => {
       sinon.stub(UserModel.prototype, 'create').resolves(CREATE_USER_1);
-      sinon.stub(AccountModel.prototype, 'create').resolves(ACCOUNT_USER);
+      sinon.stub(AccountModel.prototype, 'create').resolves(ACCOUNT_USER_1);
       sinon.stub(UserModel.prototype, 'findByUsername').resolves(null);
     });
     after(() => {
@@ -58,7 +58,7 @@ describe('Rota de Usuário', () => {
   describe('Rota POST /register', () => {
     before(async () => {
       sinon.stub(UserModel.prototype, 'create').rejects();
-      sinon.stub(AccountModel.prototype, 'create').resolves(ACCOUNT_USER);
+      sinon.stub(AccountModel.prototype, 'create').resolves(ACCOUNT_USER_1);
       sinon
         .stub(UserModel.prototype, 'findByUsername')
         .onFirstCall()

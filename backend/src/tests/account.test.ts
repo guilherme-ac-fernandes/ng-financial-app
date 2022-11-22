@@ -10,7 +10,7 @@ import { app } from '../api/app';
 import AccountModel from '../models/AccountModel';
 
 // Mocks
-import { ACCOUNT_USER } from './mocks/account.mock';
+import { ACCOUNT_USER_1 } from './mocks/account.mock';
 import {
   VALID_TOKEN_USER_1,
   VALID_TOKEN_USER_2,
@@ -24,7 +24,7 @@ const { expect } = chai;
 describe('Rota /account', () => {
   describe('Rota GET /:id', () => {
     before(async () =>
-      sinon.stub(AccountModel.prototype, 'findByPk').resolves(ACCOUNT_USER)
+      sinon.stub(AccountModel.prototype, 'findByPk').resolves(ACCOUNT_USER_1)
     );
     after(() => (AccountModel.prototype.findByPk as sinon.SinonStub).restore());
 
@@ -37,7 +37,7 @@ describe('Rota /account', () => {
       expect(result.status).to.be.equal(200);
       expect(result.body).to.have.property('id');
       expect(result.body).to.have.property('balance');
-      expect(result.body).to.be.deep.equals(ACCOUNT_USER);
+      expect(result.body).to.be.deep.equals(ACCOUNT_USER_1);
     });
   });
 
