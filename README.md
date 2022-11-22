@@ -1,6 +1,6 @@
 # App Financeiro 💵💰💳
 
-Consiste em uma aplicação full-stack dockerizada para realização de transferências monetária entre usuários cadastrados na plataforma.
+Consiste em uma aplicação full-stack dockerizada, com design responsivo, para realização de transferências monetária entre usuários cadastrados na plataforma.
 
 ### BackEnd:
 
@@ -42,18 +42,20 @@ npm test // para rodar o teste simplificado
 npm run test:coverage // para avaliar a cobertura dos testes
 exit // para sair do container do backend
 ```
+<br />
 
 <details>
   <summary><strong>A aplicação já contém alguns usuários criados:</strong></summary><br />
-  <ul>
-    <li>Usuário: barneystinson - Senha: len123Gen</li>
-    <li>Usuário: lilipad - Senha: Pillow1234</li>
-    <li>Usuário: tmosby - Senha: MosbyT789</li>
-    <li>Usuário: robin - Senha: ScherCanada1</li>
-    <li>Usuário: marshall - Senha: juDge1000</li>
-    <li>Usuário: themom - Senha: momThe1234</li>
-    
-  </ul>
+  
+ | Usuário | Senha |
+|---|---|
+| `barneystinson` | len123Gen |
+| `lilipad` | Pillow1234 |
+| `tmosby` | MosbyT789 |
+| `robin` | ScherCanada1 |
+| `marshall` | juDge1000 |
+| `themom` | momThe1234 |
+ 
 </details>
 
 ### Demonstração
