@@ -14,7 +14,7 @@ export default function DisplayUser({
 }: DisplayUserProps) {
   return (
     <header className={styles.displayUserContainer}>
-      <h2>
+      <h2 className={styles.displayUserTitle}>
         <span className='material-symbols-outlined'>account_circle</span>
         {' '}
         {username}

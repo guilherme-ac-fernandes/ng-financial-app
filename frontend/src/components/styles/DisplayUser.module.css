@@ -19,6 +19,16 @@
   width: 50%;
 }
 
+.displayUserTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.displayUserTitle span {
+  font-size: xx-large;
+}
+
 .balanceModalContainer button {
   background-color: #6e1383;
   border: none;
