@@ -59,24 +59,28 @@ export default function Register() {
           dataTestId={'register-password'}
           placeholder={'********'}
         />
-        <Button
-          text={'Voltar'}
-          type={'button'}
-          disabled={false}
-          handleSubmit={() => navigate('/')}
-          dataTestId={'return-login-button'}
-        />
-        <Button
-          text={'Register'}
-          type={'button'}
-          disabled={isAble}
-          handleSubmit={handleRegister}
-          dataTestId={'register-button'}
-        />
+        {erroRegisterAlert && (
+          <p className={styles.registerAlert}>
+            Erro no cadastro, tente novamente!
+          </p>
+        )}
+        <aside className={styles.registerButtonContainer}>
+          <Button
+            text={'Voltar'}
+            type={'button'}
+            disabled={false}
+            handleSubmit={() => navigate('/')}
+            dataTestId={'return-login-button'}
+          />
+          <Button
+            text={'Register'}
+            type={'button'}
+            disabled={isAble}
+            handleSubmit={handleRegister}
+            dataTestId={'register-button'}
+          />
+        </aside>
       </form>
-      {erroRegisterAlert && (
-        <h3>Erro no cadastro do usuário, tente novamente!</h3>
-      )}
     </section>
   );
 }
