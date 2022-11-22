@@ -10,3 +10,8 @@ export interface IUser extends ILogin {
 export interface ICreateUser extends IUser {
   id: number,
 }
+
+export interface IFilterUser {
+  username: string,
+  accountId: number,
+}
