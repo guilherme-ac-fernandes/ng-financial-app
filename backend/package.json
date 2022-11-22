@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "./build/api/server",
   "scripts": {
     "tsnd": "tsnd src/api/server.ts",
@@ -14,8 +13,7 @@
     "predev": "npm run prestart && npm run tsnd",
     "lint": "eslint ./src --ext .ts"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Guilherme Fernandes",
   "license": "ISC",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "1.0.2",
