@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  gap: 20px;
   padding: 1%;
   margin: 30px;
   border-bottom: 2px solid #6e1383;
@@ -11,12 +12,17 @@
 .balanceModalContainer {
   align-items: flex-end;
   display: flex;
-  gap: 10%;
+  gap: 10px;
   height: 100%;
   flex-wrap: wrap;
   justify-content: flex-end;
   margin-bottom: 5px;
   width: 50%;
+  min-width: 150px;
+}
+
+.balanceModalContainer h5 {
+  font-size: large;
 }
 
 .displayUserTitle {
@@ -27,26 +33,4 @@
 
 .displayUserTitle span {
   font-size: xx-large;
-}
-
-.balanceModalContainer button {
-  background-color: #6e1383;
-  border: none;
-  border-radius: 2%;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  color: white;
-  cursor: pointer;
-  height: 100%;
-  padding: 4px 12px;
-  width: 100%;
-}
-
-.balanceModalContainer button:hover {
-  background-color: #80089b;
-}
-
-.balanceModalContainer button:disabled {
-  background-color: #6f6174;
-  cursor: not-allowed;
-
 }
