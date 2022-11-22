@@ -5,13 +5,17 @@ import * as jwt from 'jsonwebtoken';
 import chaiHttp = require('chai-http');
 
 import { app } from '../api/app';
+
+// Model
+import AccountModel from '../models/AccountModel';
+
+// Mocks
 import { ACCOUNT_USER } from './mocks/account.mock';
 import {
   VALID_TOKEN_USER_1,
   VALID_TOKEN_USER_2,
   INVALID_VALID_TOKEN,
 } from './mocks/token.mock';
-import AccountModel from '../models/AccountModel';
 
 chai.use(chaiHttp);
 
