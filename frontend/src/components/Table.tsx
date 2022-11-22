@@ -6,6 +6,8 @@ import { ITransactions } from '../interfaces/ITransactions';
 import { IUser } from '../interfaces/IUser';
 import EmptyTable from './EmptyTable';
 
+import styles from './styles/Table.module.css';
+
 interface TableProps {
   transactions: ITransactions[] | [];
   loading: boolean,
@@ -28,7 +30,7 @@ export default function Table({ transactions, loading }: TableProps) {
   };
 
   return (
-    <>
+    <section className={styles.tableContainer}>
       {(!loading && transactions.length === 0) ? (
         <EmptyTable />
       ) : (
@@ -57,6 +59,6 @@ export default function Table({ transactions, loading }: TableProps) {
           </tbody>
         </table>
       )}
-    </>
+    </section>
   );
 }

@@ -1,0 +1,25 @@
+.tableContainer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tableContainer table {
+  background-color: rgba(101, 98, 98, 0.5);
+  max-width: 80%;
+  min-width: 80%;
+  overflow-y: scroll;
+}
+
+.tableContainer thead tr th,
+.tableContainer tbody tr td {
+  border: 0.5px solid white;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.tableContainer thead tr th:hover,
+.tableContainer tbody tr td:hover {
+  background-color: rgba(101, 98, 98, 0.8);
+}
