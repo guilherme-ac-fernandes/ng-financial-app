@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Componentes
 import Button from '../components/Button';
 import Input from '../components/Input';
+import ValidatePassword from '../components/ValidatePassword';
 
 // helpers
 import { register } from '../helpers/api';
@@ -35,7 +36,7 @@ export default function Register() {
     // Regex para validação da senha proveniente do Stack OverFlow após adaptação
     // source: https://pt.stackoverflow.com/questions/373574/regex-para-senha-forte#:~:text=1%20Letra%20Maiúscula%20no%20m%C3%ADnimo,%2C%20bb%20%2C%2044%20%2C%20etc
     const regexPassword = /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/;
-    if (username.length > 3 && password.match(regexPassword)) {
+    if (username.length >= 3 && password.match(regexPassword)) {
       return setIsAble(false);
     }
     setIsAble(true);
@@ -68,6 +69,7 @@ export default function Register() {
             Erro no cadastro, tente novamente!
           </p>
         )}
+        <ValidatePassword password={password} />
         <aside className={styles.registerButtonContainer}>
           <Button
             text={'Voltar'}
