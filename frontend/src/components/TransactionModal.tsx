@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { createTransactions, getUser } from '../helpers/api';
-import { IUser } from '../interfaces/IUser';
+
+// Componentes
 import Input from './Input';
 import Select from './Select';
 
+// helpers
+import { createTransactions, getUser } from '../helpers/api';
+
+// Interfaces
+import { IUser } from '../interfaces/IUser';
+
+// Styles
 import styles from './styles/TransactionModal.module.css';
 
 interface TransactionModalProps {

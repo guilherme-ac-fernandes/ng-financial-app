@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react';
+
+// Componentes
+import EmptyTable from './EmptyTable';
+
+// helpers
 import { getUser } from '../helpers/api';
 import { formatDate, formatHour } from '../helpers/dateHelper';
 import { getItem } from '../helpers/localStorage';
+
+// Interfaces
 import { ITransactions } from '../interfaces/ITransactions';
 import { IUser } from '../interfaces/IUser';
-import EmptyTable from './EmptyTable';
 
+// Styles
 import styles from './styles/Table.module.css';
 
 interface TableProps {

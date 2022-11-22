@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 // Componentes
 import Button from './Button';
 import InputDate from './InputDate';
