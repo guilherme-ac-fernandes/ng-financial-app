@@ -3,13 +3,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+}
+
+.tableContainer div {
+  max-width: 80%;
+  min-width: 350px;
+  max-height: 40%;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+/* Aplica do overflow mas escondendo a scrollbar proveniente do StackOverFlow
+source: https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll */
+.tableContainer div::-webkit-scrollbar { 
+  display: none;
 }
 
 .tableContainer table {
   background-color: rgba(101, 98, 98, 0.5);
-  max-width: 80%;
-  min-width: 80%;
-  overflow-y: scroll;
 }
 
 .tableContainer thead tr th,

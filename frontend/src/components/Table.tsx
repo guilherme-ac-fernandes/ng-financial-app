@@ -10,7 +10,7 @@ import styles from './styles/Table.module.css';
 
 interface TableProps {
   transactions: ITransactions[] | [];
-  loading: boolean,
+  loading: boolean;
 }
 
 export default function Table({ transactions, loading }: TableProps) {
@@ -31,33 +31,35 @@ export default function Table({ transactions, loading }: TableProps) {
 
   return (
     <section className={styles.tableContainer}>
-      {(!loading && transactions.length === 0) ? (
+      {!loading && transactions.length === 0 ? (
         <EmptyTable />
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Realizado por</th>
-              <th>Recebido por</th>
-              <th>Value</th>
-              <th>Date</th>
-              <th>Horário</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((transaction, index) => (
-              <tr key={`table-${index}`}>
-                <td>{index + 1}</td>
-                <td>{findUser(transaction.debitedAccountId)}</td>
-                <td>{findUser(transaction.creditedAccountId)}</td>
-                <td>{`RS ${transaction.value}`}</td>
-                <td>{formatDate(transaction.createdAt as string)}</td>
-                <td>{formatHour(transaction.createdAt as string)}</td>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Realizado por</th>
+                <th>Recebido por</th>
+                <th>Value</th>
+                <th>Date</th>
+                <th>Horário</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {transactions.map((transaction, index) => (
+                <tr key={`table-${index}`}>
+                  <td>{index + 1}</td>
+                  <td>{findUser(transaction.debitedAccountId)}</td>
+                  <td>{findUser(transaction.creditedAccountId)}</td>
+                  <td>{`RS ${transaction.value}`}</td>
+                  <td>{formatDate(transaction.createdAt as string)}</td>
+                  <td>{formatHour(transaction.createdAt as string)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </section>
   );
