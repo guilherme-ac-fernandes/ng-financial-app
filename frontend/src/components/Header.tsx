@@ -9,9 +9,11 @@ export default function Header() {
     return navigate('/');
   };
 
+  const title = '<NG_CASH />';
+
   return (
     <header className={styles.headerContainer}>
-      <h1 className={styles.headerTitle}>NG_Cash</h1>
+      <h1 className={styles.headerTitle}>{title}</h1>
       <div onClick={handleLogout} className={styles.divLogout}>
         <span className='material-symbols-outlined'>logout</span>
         {' '}
