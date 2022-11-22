@@ -39,8 +39,7 @@ export default function Register() {
   return (
     <section className={styles.registerContainer}>
       <form className={styles.registerFormContainer}>
-        <h1>NG_CASH</h1>
-        <h4>Cadastro</h4>
+        <h1>CADASTRO</h1>
         <Input
           id={'register-username'}
           label={'Nome do usuário:'}
@@ -48,7 +47,7 @@ export default function Register() {
           value={username}
           setValue={setUsername}
           dataTestId={'register-username'}
-          placeholder={'username'}
+          placeholder={'nome com no mínimo 3 caracteres'}
         />
         <Input
           id={'register-password'}
@@ -73,7 +72,7 @@ export default function Register() {
             dataTestId={'return-login-button'}
           />
           <Button
-            text={'Register'}
+            text={'Cadastrar'}
             type={'button'}
             disabled={isAble}
             handleSubmit={handleRegister}

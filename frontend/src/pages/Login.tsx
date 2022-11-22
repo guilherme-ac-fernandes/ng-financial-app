@@ -35,10 +35,12 @@ export default function Login() {
     setIsAble(true);
   }, [username, password, setIsAble]);
 
+  const title = '<NG_CASH />';
+
   return (
     <section className={styles.loginContainer}>
       <form className={styles.loginFormContainer}>
-        <h1>NG_Cash</h1>
+        <h1>{title}</h1>
         <Input
           id={'login-username'}
           label={'Nome do usuário:'}
@@ -46,7 +48,7 @@ export default function Login() {
           value={username}
           setValue={setUsername}
           dataTestId={'login-username'}
-          placeholder={'username'}
+          placeholder={'nome com no mínimo 3 caracteres'}
         />
         <Input
           id={'login-password'}
@@ -65,19 +67,19 @@ export default function Login() {
 
         <aside className={styles.loginButtonContainer}>
           <Button
-            text={'Login'}
-            type={'button'}
-            disabled={isAble}
-            handleSubmit={handleSubmit}
-            dataTestId={'login-button'}
-            />
-          <Button
-            text={'Register'}
+            text={'Cadastrar'}
             type={'button'}
             disabled={false}
             handleSubmit={() => navigate('/register')}
             dataTestId={'login-button'}
           />
+          <Button
+            text={'Entrar'}
+            type={'button'}
+            disabled={isAble}
+            handleSubmit={handleSubmit}
+            dataTestId={'login-button'}
+            />
         </aside>
         
       </form>
