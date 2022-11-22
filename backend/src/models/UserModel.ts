@@ -1,5 +1,5 @@
 import { Transaction } from 'sequelize/types';
-import { IUser, ICreateUser } from '../interfaces/IUser';
+import { IUser, ICreateUser, IFilterUser } from '../interfaces/IUser';
 import User from '../database/models/User';
 
 export default class UserModel {
@@ -9,7 +9,7 @@ export default class UserModel {
     return this._model.findOne({ where: { username } });
   }
 
-  async findAll(): Promise<ICreateUser[] | null> {
+  async findAll(): Promise<IFilterUser[] | null> {
     return this._model.findAll({ attributes: { exclude: ['id', 'password'] } });
   }
 
