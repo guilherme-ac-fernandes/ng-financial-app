@@ -1,6 +1,6 @@
 # App Financeiro 💵💰💳
 
-Consiste em uma aplicação full-stack dockerizada, com design responsivo, para realização de transferências monetária entre usuários cadastrados na plataforma.
+Consiste em uma aplicação full-stack dockerizada, com design responsivo, para realização de transferências monetárias entre usuários cadastrados na plataforma.
 
 ### BackEnd:
 
