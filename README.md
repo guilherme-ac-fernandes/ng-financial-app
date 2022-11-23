@@ -1,6 +1,6 @@
 # App Financeiro 💵💰💳
 
-Consiste em uma aplicação full-stack dockerizada, com design responsivo, para realização de transferências monetária entre usuários cadastrados na plataforma.
+Consiste em uma aplicação full-stack dockerizada, com design responsivo, para realização de transferências monetárias entre usuários cadastrados na plataforma.
 
 ### BackEnd:
 
@@ -27,6 +27,7 @@ Para rodar a aplicação dockerizada, instalar as dependências e iniciar as apl
 npm run compose:up // para subir o docker-compose
 npm run back:acess // para acessar o container do backend
 npm run db:migrate // para criar as tabelas e popular no banco de caso
+exit // para sair do container do backend
 
 <-- caso o banco de dados não exista ainda -->
 npm run db:reset // para criar o banco de dados
