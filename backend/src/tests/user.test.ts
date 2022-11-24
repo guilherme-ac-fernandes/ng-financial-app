@@ -12,15 +12,8 @@ import AccountModel from '../models/AccountModel';
 
 // Mocks
 import { ACCOUNT_USER_1 } from './mocks/account.mock';
-import {
-  ALL_USERS,
-  ALL_USERS_EXCLUDE_FIELDS,
-  CREATE_USER_1,
-} from './mocks/user.mock';
-import {
-  VALID_TOKEN_USER_1,
-  VALID_TOKEN_USER_2,
-} from './mocks/token.mock';
+import { ALL_USERS, CREATE_USER_1 } from './mocks/user.mock';
+import { VALID_TOKEN_USER_1 } from './mocks/token.mock';
 
 chai.use(chaiHttp);
 
@@ -184,45 +177,40 @@ describe('Rota de Usuário', () => {
   });
 
   describe('Rota GET /user', () => {
-    before(async () =>
-      sinon.stub(UserModel.prototype, 'findAll').resolves(ALL_USERS)
-    );
-    after(() => (UserModel.prototype.findAll as sinon.SinonStub).restore());
+    before(async () => {
+      sinon.stub(UserModel.prototype, 'findAll').resolves(ALL_USERS);
+      sinon.stub(jwt, 'verify').callsFake(() => {
+        return Promise.resolve({ success: 'Token is valid' });
+      });
+    });
+    after(() => {
+      (UserModel.prototype.findAll as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
+    });
 
-    it('Caso de sucesso - Usuário 1', async () => {
+    it('Caso de sucesso', async () => {
       const result = await chai
         .request(app)
         .get('/user')
         .set('authorization', VALID_TOKEN_USER_1);
 
-      const filterResponse = ALL_USERS_EXCLUDE_FIELDS.filter(
-        (item) => item.accountId !== 1
-      );
       expect(result.status).to.be.equal(200);
       expect(result.body).to.be.a('array');
-      expect(result.body).to.be.deep.equal(filterResponse);
-    });
-
-    it('Caso de sucesso - Usuário 2', async () => {
-      const result = await chai
-        .request(app)
-        .get('/user')
-        .set('authorization', VALID_TOKEN_USER_2);
-
-      const filterResponse = ALL_USERS_EXCLUDE_FIELDS.filter(
-        (item) => item.accountId !== 2
-      );
-      expect(result.status).to.be.equal(200);
-      expect(result.body).to.be.a('array');
-      expect(result.body).to.be.deep.equal(filterResponse);
+      expect(result.body).to.be.deep.equal(ALL_USERS);
     });
   });
 
-  describe('Rota POST /login', () => {
-    before(async () =>
-      sinon.stub(UserModel.prototype, 'findAll').resolves(null)
-    );
-    after(() => (UserModel.prototype.findAll as sinon.SinonStub).restore());
+  describe('Rota GET /', () => {
+    before(async () => {
+      sinon.stub(UserModel.prototype, 'findAll').resolves(null);
+      sinon.stub(jwt, 'verify').callsFake(() => {
+        return Promise.resolve({ success: 'Token is valid' });
+      });
+    });
+    after(() => {
+      (UserModel.prototype.findAll as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
+    });
 
     it('Caso de falha - usuário não existe', async () => {
       const result = await chai
