@@ -52,7 +52,7 @@ describe('Rota /transactions', () => {
         .send({
           debitedAccountId: 1,
           creditedAccountId: 2,
-          value: 12.0,
+          value: '12.00',
         });
 
       expect(result.status).to.be.equal(201);
@@ -90,7 +90,7 @@ describe('Rota /transactions', () => {
         .send({
           debitedAccountId: 1,
           creditedAccountId: 2,
-          value: 12.0,
+          value: '12.00',
         });
 
       expect(result.status).to.be.equal(500);
@@ -105,7 +105,7 @@ describe('Rota /transactions', () => {
         .send({
           debitedAccountId: 1,
           creditedAccountId: 2,
-          value: -12.0,
+          value: '-12.00',
         });
 
       expect(result.status).to.be.equal(400);
@@ -122,7 +122,7 @@ describe('Rota /transactions', () => {
         .send({
           debitedAccountId: 1,
           creditedAccountId: 1,
-          value: 12.0,
+          value: '12.00',
         });
 
       expect(result.status).to.be.equal(401);
