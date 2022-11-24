@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import UserService from '../services/UserService';
 
-interface NewRequest extends Request {
-  username?: string,
-  accountId?: number,
-}
+// interface NewRequest extends Request {
+//   username?: string,
+//   accountId?: number,
+// }
 
 export default class CarController {
   private _user: UserService;
@@ -13,8 +13,8 @@ export default class CarController {
   }
 
   public async findAll(req: Request, res: Response, next: NextFunction) {
-    const { accountId } = req as NewRequest;
-    const { code, message, data } = await this._user.findAll(Number(accountId));
+    // const { accountId } = req as NewRequest;
+    const { code, message, data } = await this._user.findAll();
     if (message) return next({ code, message });
     return res.status(code).json(data);
   }

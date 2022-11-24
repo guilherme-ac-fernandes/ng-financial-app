@@ -20,11 +20,10 @@ export default class UserService {
     return { code: 200, data: userFound };
   }
 
-  public async findAll(accountId: number) {
+  public async findAll() {
     const users = await this._user.findAll();
     if (!users) return { code: 404, message: 'Users not found' };
-    const usersFilter = users.filter((user) => user.accountId !== accountId);
-    return { code: 200, data: usersFilter };
+    return { code: 200, data: users };
   }
 
   public async login({ username, password }: ILogin) {
