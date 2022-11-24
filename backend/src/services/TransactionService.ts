@@ -8,6 +8,7 @@ import { IResponse } from '../interfaces/IResponse';
 import { sumBalance, subBalance } from '../helpers/operation';
 
 const TRANSACTION_NOT_FOUND = { code: 404, message: 'Transactions not found' };
+const INSUFFICIENT_FUNDS = { code: 400, message: 'Insufficient funds' };
 
 export default class TransactionService {
   private _transaction: TransactionModel;
@@ -24,7 +25,7 @@ export default class TransactionService {
     const debitUser = await this._account.findByPk(debitedAccountId) as unknown as ICreateAccount;
     const creditUser = await this._account.findByPk(creditedAccountId) as unknown as ICreateAccount;
     if (!debitUser || !creditUser) return { code: 404, message: 'Invalid account' };
-    if (Number(debitUser.balance) < value) return { code: 400, message: 'Insufficient funds' };
+    if (Number(debitUser.balance) < Number(value)) return INSUFFICIENT_FUNDS;
     const transaction = await Sequelize.transaction();
     try {
       const transactionCreated = await this._transaction
