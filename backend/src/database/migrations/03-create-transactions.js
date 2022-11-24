@@ -30,7 +30,7 @@ module.exports = {
         onUpdate: 'CASCADE',
       },
       value: {
-        type: Sequelize.DECIMAL(10,2),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
