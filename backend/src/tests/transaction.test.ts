@@ -14,6 +14,7 @@ import TransactionModel from '../models/TransactionModel';
 import { ACCOUNT_USER_1, ACCOUNT_USER_2 } from './mocks/account.mock';
 import { VALID_TOKEN_USER_1 } from './mocks/token.mock';
 import { ALL_TRANSACTION, TRANSACTION_CREATED } from './mocks/transaction.mock';
+import { ALL_USERS } from './mocks/user.mock';
 
 chai.use(chaiHttp);
 
@@ -37,11 +38,15 @@ describe('Rota /transactions', () => {
       sinon
         .stub(TransactionModel.prototype, 'create')
         .resolves(TRANSACTION_CREATED);
+      sinon.stub(jwt, 'verify').callsFake(() => {
+        return Promise.resolve({ success: 'Token is valid' });
+      });
     });
     after(() => {
       (AccountModel.prototype.findByPk as sinon.SinonStub).restore();
       (AccountModel.prototype.update as sinon.SinonStub).restore();
       (TransactionModel.prototype.create as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
     });
 
     it('Caso de sucesso', async () => {
@@ -75,11 +80,15 @@ describe('Rota /transactions', () => {
         .resolves(ACCOUNT_USER_2);
       sinon.stub(AccountModel.prototype, 'update').rejects();
       sinon.stub(TransactionModel.prototype, 'create').rejects();
+      sinon.stub(jwt, 'verify').callsFake(() => {
+        return Promise.resolve({ success: 'Token is valid' });
+      });
     });
     after(() => {
       (AccountModel.prototype.findByPk as sinon.SinonStub).restore();
       (AccountModel.prototype.update as sinon.SinonStub).restore();
       (TransactionModel.prototype.create as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
     });
 
     it('Caso de falha - erro na criação', async () => {
@@ -140,10 +149,12 @@ describe('Rota /transactions', () => {
       sinon
         .stub(TransactionModel.prototype, 'findByDate')
         .resolves([TRANSACTION_CREATED]);
+        sinon.stub(jwt, 'verify').callsFake(() => ALL_USERS[0]);
     });
     after(() => {
       (TransactionModel.prototype.findAll as sinon.SinonStub).restore();
       (TransactionModel.prototype.findByDate as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
     });
 
     it('Caso de sucesso - retorna todas as transações', async () => {
@@ -165,6 +176,9 @@ describe('Rota /transactions', () => {
       const filterResponse = ALL_TRANSACTION.filter(
         (item) => item.debitedAccountId === 1
       );
+
+      console.log();
+      
 
       expect(result.status).to.be.equal(200);
       expect(result.body).to.be.deep.equals(filterResponse);
