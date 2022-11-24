@@ -16,6 +16,7 @@ import {
   VALID_TOKEN_USER_2,
   INVALID_VALID_TOKEN,
 } from './mocks/token.mock';
+import { ALL_USERS } from './mocks/user.mock';
 
 chai.use(chaiHttp);
 
@@ -23,10 +24,14 @@ const { expect } = chai;
 
 describe('Rota /account', () => {
   describe('Rota GET /:id', () => {
-    before(async () =>
-      sinon.stub(AccountModel.prototype, 'findByPk').resolves(ACCOUNT_USER_1)
-    );
-    after(() => (AccountModel.prototype.findByPk as sinon.SinonStub).restore());
+    before(async () => {
+      sinon.stub(AccountModel.prototype, 'findByPk').resolves(ACCOUNT_USER_1);
+      sinon.stub(jwt, 'verify').callsFake(() => ALL_USERS[0]);
+    });
+    after(() => {
+      (AccountModel.prototype.findByPk as sinon.SinonStub).restore();
+      (jwt.verify as sinon.SinonStub).restore();
+    });
 
     it('Caso de sucesso', async () => {
       const result = await chai
@@ -42,6 +47,14 @@ describe('Rota /account', () => {
   });
 
   describe('Rota GET /:id', () => {
+    before(async () =>
+      sinon
+        .stub(jwt, 'verify')
+        .onSecondCall()
+        .callsFake(() => ALL_USERS[1])
+    );
+    after(() => (jwt.verify as sinon.SinonStub).restore());
+
     it('Caso de falha - Token Inválido', async () => {
       const result = await chai
         .request(app)
