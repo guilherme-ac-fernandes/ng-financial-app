@@ -1,11 +1,11 @@
-import { Model, INTEGER, DATE, DECIMAL, NOW } from 'sequelize';
+import { Model, INTEGER, DATE, STRING, NOW } from 'sequelize';
 import db from '.';
 
 class Transaction extends Model {
   id!: number;
   debitedAccountId!: number;
   creditedAccountId!: number;
-  value!: number;
+  value!: string;
   createdAt!: string;
 }
 
@@ -26,7 +26,7 @@ Transaction.init(
       allowNull: false,
     },
     value: {
-      type: DECIMAL,
+      type: STRING,
       allowNull: false,
     },
     createdAt: {

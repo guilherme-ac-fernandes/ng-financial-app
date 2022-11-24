@@ -1,7 +1,7 @@
 export interface ITransaction {
   debitedAccountId: number,
   creditedAccountId: number,
-  value: number,
+  value: string,
 }
 
 export interface ICreateTransaction extends ITransaction {
