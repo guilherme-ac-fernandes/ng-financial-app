@@ -1,5 +1,6 @@
 import { Model, INTEGER, DATE, STRING, NOW } from 'sequelize';
 import db from '.';
+import Account from './Account';
 
 class Transaction extends Model {
   id!: number;
@@ -42,5 +43,23 @@ Transaction.init(
     updatedAt: false,
   },
 );
+
+Transaction.belongsTo(Account, {
+  foreignKey: 'debitedAccountId',
+  as: 'debitedAccount',
+});
+Transaction.belongsTo(Account, {
+  foreignKey: 'creditedAccountId',
+  as: 'creditedAccount',
+});
+
+Account.hasMany(Transaction, {
+  foreignKey: 'debitedAccountId',
+  as: 'debitedTransactions',
+});
+Account.hasMany(Transaction, {
+  foreignKey: 'creditedAccountId',
+  as: 'creditedTransactions',
+});
 
 export default Transaction;
