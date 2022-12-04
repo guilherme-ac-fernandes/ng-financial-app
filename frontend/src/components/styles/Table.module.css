@@ -5,11 +5,12 @@
   align-items: center;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: 100%;
 }
 
 .tableContainer div {
+  min-width: 80%;
   max-width: 80%;
-  min-width: 350px;
   max-height: 40%;
   overflow-y: scroll;
   overflow-x: scroll;
