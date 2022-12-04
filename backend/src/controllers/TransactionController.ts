@@ -1,10 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import { ITransaction } from '../interfaces/ITransaction';
+import { ICreateTransaction, ITransaction } from '../interfaces/ITransaction';
 import TransactionService from '../services/TransactionService';
 
 interface NewRequest extends Request {
   username?: string,
   accountId?: number,
+}
+
+interface IResponse {
+  code: number,
+  message?: string,
+  data?: ICreateTransaction,
 }
 
 export default class TransactionController {
@@ -24,7 +30,7 @@ export default class TransactionController {
       creditedAccountId,
       debitedAccountId,
       value,
-    });
+    }) as unknown as IResponse;
     if (message) return next({ code, message });
     return res.status(code).json(data);
   }
