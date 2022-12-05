@@ -1,6 +1,6 @@
-// import { ITransactions } from '../../interfaces/ITransactions';
+import { ITransactions } from '../../interfaces/ITransactions';
 
-export const transactionsMock = [
+export const transactionsMock: ITransactions[] = [
   {
     id: 1,
     debitedAccountId: 1,
