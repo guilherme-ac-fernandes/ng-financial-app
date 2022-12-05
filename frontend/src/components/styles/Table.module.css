@@ -39,6 +39,14 @@ source: https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-s
   background-color: rgba(101, 98, 98, 0.8);
 }
 
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
+
 @media (min-width: 1024px) {
   .tableContainer div {
     width: 80%;
