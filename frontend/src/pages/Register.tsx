@@ -45,7 +45,7 @@ export default function Register() {
   return (
     <section className={styles.registerContainer}>
       <form className={styles.registerFormContainer}>
-        <h1>CADASTRO</h1>
+        <h1 data-testid="register-title">CADASTRO</h1>
         <Input
           id={'register-username'}
           label={'Nome do usuário:'}
@@ -65,7 +65,7 @@ export default function Register() {
           placeholder={'********'}
         />
         {erroRegisterAlert && (
-          <p className={styles.registerAlert}>
+          <p className={styles.registerAlert} data-testid="register-alert">
             Erro no cadastro, tente novamente!
           </p>
         )}
