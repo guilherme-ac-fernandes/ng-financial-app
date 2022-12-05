@@ -7,6 +7,7 @@ import Select from './Select';
 
 // helpers
 import { createTransactions, getUser } from '../helpers/api';
+import { getItem } from '../helpers/localStorage';
 
 // Interfaces
 import { IUser } from '../interfaces/IUser';
@@ -31,7 +32,8 @@ export default function TransactionModal({
   useEffect(() => {
     const getUsers = async () => {
       const allUsers = (await getUser()) as unknown as IUser[];
-      setUsers(allUsers);
+      const { username } = getItem('user') as unknown as IUser;
+      setUsers(allUsers.filter((user) => user.username !== username));
     };
     getUsers();
   }, []);
