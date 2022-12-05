@@ -8,7 +8,7 @@ A API contém endpoints referente a usuários, contas e transações.
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `GET` | Retorna todos os usuários, exceto o usuário presente no token enviado na requisição | http://localhost:3001/user |
+| `GET` | Retorna todos os usuários cadastrados | http://localhost:3001/user |
 | `POST` | Realiza o login do usuário, retornando um token | http://localhost:3001/login |
 | `POST` | Realiza o cadastro de um novo usuário, retornando um token | http://localhost:3001/register |
 
