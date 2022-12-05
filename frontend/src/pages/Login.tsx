@@ -24,7 +24,7 @@ export default function Login() {
     try {
       setInvalidUserAlert(false);
       const user = await login({ username, password });
-      setItem('user', user);     
+      setItem('user', user);
       return navigate(`/transactions/${user.accountId}`);
     } catch (error) {
       setInvalidUserAlert(true);
@@ -46,7 +46,7 @@ export default function Login() {
   return (
     <section className={styles.loginContainer}>
       <form className={styles.loginFormContainer}>
-        <h1 data-testid="login-title">{title}</h1>
+        <h1 data-testid='login-title'>{title}</h1>
         <Input
           id={'login-username'}
           label={'Nome do usuário:'}
@@ -66,7 +66,7 @@ export default function Login() {
           placeholder={'********'}
         />
         {invalidUserAlert && (
-          <p className={styles.loginAlert} data-testid="login-alert">
+          <p className={styles.loginAlert} data-testid='login-alert'>
             Usuário não existe, faça o cadastro
           </p>
         )}
@@ -77,7 +77,7 @@ export default function Login() {
             type={'button'}
             disabled={false}
             handleSubmit={() => navigate('/register')}
-            dataTestId={'register-button'}
+            dataTestId={'login-register-button'}
           />
           <Button
             text={'Entrar'}
@@ -85,9 +85,8 @@ export default function Login() {
             disabled={isAble}
             handleSubmit={handleSubmit}
             dataTestId={'login-button'}
-            />
+          />
         </aside>
-        
       </form>
     </section>
   );
