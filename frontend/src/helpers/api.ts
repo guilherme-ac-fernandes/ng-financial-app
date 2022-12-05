@@ -83,3 +83,5 @@ export const getTransactionsBySearchAndDate = async (search: string, date: strin
     ).then((response) => response.data);
   return data;
 };
+
+export default api;
