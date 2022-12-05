@@ -9,7 +9,7 @@ import Loading from '../components/Loading';
 import Table from '../components/Table';
 
 // helpers
-import { getBalance, getTransactionsDefault } from '../helpers/api';
+import { getBalance, getTransactionsDefault, getUser } from '../helpers/api';
 import { getItem } from '../helpers/localStorage';
 
 // Interfaces
@@ -22,6 +22,7 @@ import styles from './styles/Transactions.module.css';
 
 export default function Transactions() {
   const [user, setUser] = useState<IUser>({});
+  const [users, setUsers] = useState<IUser[]>([]);
   const [balance, setBalance] = useState<string>('');
   const [transactions, setTransactions] = useState<ITransactions[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,8 +36,17 @@ export default function Transactions() {
     if (balance === '' && transactions.length === 0) {
       axiosRequest();
     }
+    if (users.length === 0) {
+      getUsers();
+    }
     setLoading(false);
-  }, [navigate, balance, transactions]);
+  }, [navigate, balance, transactions, users]);
+
+  const getUsers = async () => {
+    const allUsers = (await getUser()) as unknown as IUser[];
+    const { username } = getItem('user') as unknown as IUser;
+    setUsers(allUsers.filter((user) => user.username !== username));
+  };
 
   const axiosRequest = async () => {
     const balanceAxios = (await getBalance()) as unknown as IAccount;
@@ -61,6 +71,7 @@ export default function Transactions() {
             username={user.username}
             balance={balance}
             axiosRequest={axiosRequest}
+            users={users}
           />
           <Filters updateTransactions={updateTransactions} />
           <Table transactions={transactions} loading={loading} />

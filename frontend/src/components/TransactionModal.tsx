@@ -6,8 +6,7 @@ import Input from './Input';
 import Select from './Select';
 
 // helpers
-import { createTransactions, getUser } from '../helpers/api';
-import { getItem } from '../helpers/localStorage';
+import { createTransactions } from '../helpers/api';
 
 // Interfaces
 import { IUser } from '../interfaces/IUser';
@@ -17,26 +16,18 @@ import styles from './styles/TransactionModal.module.css';
 
 interface TransactionModalProps {
   axiosRequest: () => void;
+  users: IUser[],
 }
 
 export default function TransactionModal({
   axiosRequest,
+  users,
 }: TransactionModalProps) {
   const [show, setShow] = useState(false);
-  const [users, setUsers] = useState<IUser[]>([]);
   const [creditedAccountId, setCreditedAccountId] = useState('');
   const [value, setValue] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [invalidTransactionAlert, setInvalidTransactionAlert] = useState(false);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const allUsers = (await getUser()) as unknown as IUser[];
-      const { username } = getItem('user') as unknown as IUser;
-      setUsers(allUsers.filter((user) => user.username !== username));
-    };
-    getUsers();
-  }, []);
 
   useEffect(() => {
     if (creditedAccountId !== '' && value !== '') {
