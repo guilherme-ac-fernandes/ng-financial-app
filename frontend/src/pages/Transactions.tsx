@@ -32,9 +32,11 @@ export default function Transactions() {
     const userLocalStorage = getItem('user') as unknown as IUser;
     if (!userLocalStorage) return navigate('/');
     setUser(userLocalStorage);
-    axiosRequest();
+    if (balance === '' && transactions.length === 0) {
+      axiosRequest();
+    }
     setLoading(false);
-  }, [navigate]);
+  }, [navigate, balance, transactions]);
 
   const axiosRequest = async () => {
     const balanceAxios = (await getBalance()) as unknown as IAccount;
