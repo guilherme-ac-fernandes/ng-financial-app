@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './styles/ValidatePassword.module.css';
 
 interface ValidatePasswordProps {
-  password: string,
+  password: string;
 }
 
 export default function ValidatePassword({ password }: ValidatePasswordProps) {
@@ -32,11 +32,34 @@ export default function ValidatePassword({ password }: ValidatePasswordProps) {
     }
   }, [password]);
   return (
-    <aside className={styles.validatePasswordContainer}>
-      <span>A senha deve conter pelo menos:</span>{ ' ' }
-      <span className={ length ? styles.valid : styles.invalid }>8 caracteres</span>{ ', ' }
-      <span className={ underscore ? styles.valid : styles.invalid }>um número</span>{ ', ' }
-      <span className={ upperscore ? styles.valid : styles.invalid }>uma letra maiúscula</span>{ '.' }
+    <aside
+      className={styles.validatePasswordContainer}
+      data-testid='validate-password-container'
+    >
+      <span data-testid='validate-password-message'>
+        A senha deve conter pelo menos:
+      </span>{' '}
+      <span
+        data-testid='validate-password-length'
+        className={length ? styles.valid : styles.invalid}
+      >
+        8 caracteres
+      </span>
+      {', '}
+      <span
+        data-testid='validate-password-number'
+        className={underscore ? styles.valid : styles.invalid}
+      >
+        um número
+      </span>
+      {', '}
+      <span
+        data-testid='validate-password-upper_letter'
+        className={upperscore ? styles.valid : styles.invalid}
+      >
+        uma letra maiúscula
+      </span>
+      {'.'}
     </aside>
   );
 }
