@@ -10,6 +10,7 @@ import App from '../App';
 import { userMock } from './mocks/user.mock';
 import { accountMock } from './mocks/account.mock';
 import { transactionsMock } from './mocks/transactions.mock';
+import { usersMock } from './mocks/users.mock';
 
 // Data-TestId
 const LOGIN_TITLE = 'login-title';
@@ -81,7 +82,8 @@ describe('Testes da tela de Login', () => {
     jest
       .spyOn(API, 'get')
       .mockResolvedValueOnce({ data: accountMock })
-      .mockResolvedValue({ data: transactionsMock });
+      .mockResolvedValueOnce({ data: transactionsMock })
+      .mockResolvedValue({ data: usersMock });
 
     const { history } = renderWithRouter(<App />);
 
