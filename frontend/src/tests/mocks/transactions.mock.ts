@@ -40,3 +40,5 @@ export const transactionsMock: ITransactions[] = [
     },
   },
 ];
+
+export const newTransactionsMock = [];
