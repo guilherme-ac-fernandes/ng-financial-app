@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Componentes
 import EmptyTable from './EmptyTable';
 
 // helpers
-import { getUser } from '../helpers/api';
 import { formatDate, formatHour } from '../helpers/dateHelper';
 import { getItem } from '../helpers/localStorage';
 
@@ -21,20 +21,14 @@ interface TableProps {
 }
 
 export default function Table({ transactions, loading }: TableProps) {
-  const [users, setUsers] = useState<IUser[]>([]);
+  const [user, setUser] = useState<IUser>({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const getUsers = async () => {
-      const allUsers = (await getUser()) as unknown as IUser[];
-      const { username, accountId } = getItem('user') as unknown as IUser;
-      setUsers([...allUsers, { username, accountId }]);
-    };
-    getUsers();
-  }, []);
-
-  const findUser = (tableId: number) => {
-    return users.find(({ accountId }) => accountId === tableId)?.username;
-  };
+    const userLocalStorage = getItem('user') as unknown as IUser;
+    if (!userLocalStorage) return navigate('/');
+    setUser(userLocalStorage);
+  }, [navigate]);
 
   return (
     <section className={styles.tableContainer}>
@@ -57,9 +51,15 @@ export default function Table({ transactions, loading }: TableProps) {
               {transactions.map((transaction, index) => (
                 <tr key={`table-${index}`}>
                   <td>{index + 1}</td>
-                  <td>{findUser(transaction.debitedAccountId)}</td>
-                  <td>{findUser(transaction.creditedAccountId)}</td>
-                  <td>{`RS ${transaction.value}`}</td>
+                  <td>{transaction.debitedAccount.user.username}</td>
+                  <td>{transaction.creditedAccount.user.username}</td>
+                  <td
+                    className={
+                      transaction.debitedAccount.user.username === user.username
+                        ? styles.valid
+                        : styles.invalid
+                    }
+                  >{`RS ${Number(transaction.value).toFixed(2)}`}</td>
                   <td>{formatDate(transaction.createdAt as string)}</td>
                   <td>{formatHour(transaction.createdAt as string)}</td>
                 </tr>
