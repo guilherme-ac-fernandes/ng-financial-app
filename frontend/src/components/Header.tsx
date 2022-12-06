@@ -13,10 +13,11 @@ export default function Header() {
 
   return (
     <header className={styles.headerContainer}>
-      <h1 className={styles.headerTitle}>{title}</h1>
+      <h1 data-testid="header_title" className={styles.headerTitle}>
+        {title}
+      </h1>
       <div onClick={handleLogout} className={styles.divLogout}>
-        <span className='material-symbols-outlined'>logout</span>
-        {' '}
+        <span className='material-symbols-outlined'>logout</span>{' '}
         <span>Sair</span>
       </div>
     </header>
